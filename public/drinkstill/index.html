@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f2ecdf">
+  <meta name="description" content="Café Bazilli — café especial 100% Arábica, produzido em Caconde/SP, da lavoura à xícara.">
+  <title>Café Bazilli — da lavoura à xícara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Inter:wght@400;500;600;800;900&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============ FILM GRAIN ============ -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- ============ NAV ============ -->
+  <nav id="nav" class="nav" aria-label="Navegação principal">
+    <div class="nav-inner">
+      <a href="#hero" class="wordmark" aria-label="Café Bazilli — voltar ao topo">
+        <span>BAZILLI</span><span class="wordmark-dot" aria-hidden="true"></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#product" class="nav-underline">Cold Brew</a></li>
+        <li><a href="#inside" class="nav-underline">Origem</a></li>
+        <li><a href="#story" class="nav-underline">História</a></li>
+        <li><a href="#stockists" class="nav-underline">Onde comprar</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#shop" class="nav-shop">Loja <span class="arrow-nudge" aria-hidden="true">→</span></a>
+        <button type="button" class="cart-btn" id="cartOpenBtn" aria-label="Abrir carrinho, 0 itens">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 8 H18 L17 20 H7 Z"></path><path d="M9 8 V6 a3 3 0 0 1 6 0 V8"></path>
+          </svg>
+        </button>
+        <button type="button" class="menu-btn" id="menuBtn" aria-label="Abrir menu">
+          <span class="burger"><span></span><span></span><span></span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ MOBILE MENU OVERLAY ============ -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <button type="button" class="mobile-menu-close" id="menuCloseBtn" aria-label="Fechar menu">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5 L19 19 M19 5 L5 19"></path></svg>
+    </button>
+    <div class="mobile-menu-list">
+      <a href="#product" class="mobile-menu-link" style="--d:0.05s">Cold Brew</a>
+      <a href="#inside" class="mobile-menu-link" style="--d:0.12s">Origem</a>
+      <a href="#story" class="mobile-menu-link" style="--d:0.19s">História</a>
+      <a href="#stockists" class="mobile-menu-link" style="--d:0.26s">Onde comprar</a>
+      <a href="#shop" class="mobile-menu-shop" style="--d:0.34s">Loja <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <div class="hero-scroll" id="heroScroll">
+    <section id="hero" class="hero">
+      <!-- preloader screen -->
+      <div class="preloader" id="preloader">
+        <span class="preloader-word">BAZILLI<span class="preloader-dot"></span></span>
+      </div>
+
+      <!-- dark ink layer revealed by growing circle -->
+      <div class="hero-ink" id="heroInk">
+        <div class="bloom" data-bloom style="--bloom-color:#c9855f"></div>
+        <div class="hero-particles"><canvas id="heroCanvas"></canvas></div>
+        <div class="hero-product-scene" id="heroProductScene" aria-hidden="true">
+          <video id="heroProductVideo" class="hero-product-video" muted playsinline preload="auto" poster="assets/cold-brew-front.png">
+            <source src="assets/cold-brew-rotation-alpha-v3.webm" type="video/webm">
+          </video>
+          <img class="hero-product-poster" src="assets/cold-brew-front.png" alt="">
+        </div>
+        <div class="hero-support" data-support>
+          <div class="eyebrow" data-support-item="true"><span class="eyebrow-num">01</span><span class="eyebrow-sep">/</span>A origem</div>
+          <h2 class="hero-support-title" data-support-item="true">Café especial 100% Arábica, da lavoura à xícara.</h2>
+          <div class="rule" data-support-rule="true" data-reveal-line></div>
+          <p class="hero-support-copy" data-support-item="true">Produzido pela família Bazilli no Sítio Boa Vista do Engano, em Caconde/SP, na Região Vulcânica. Torrado artesanalmente, em pequenos lotes.</p>
+          <div class="hero-support-stats" data-support-item="true">
+            <span><b>1.000</b> m de altitude</span>
+            <span aria-hidden="true" class="stat-sep">·</span>
+            <span><b>1916</b> no café</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- bone hero face -->
+      <div class="hero-face">
+        <div class="hero-word">
+          <h1 class="hero-wordmark" aria-label="BAZILLI.">
+            <span class="hero-letter" style="--d:0.00s">B</span><span class="hero-letter" style="--d:0.05s">A</span><span class="hero-letter" style="--d:0.10s">Z</span><span class="hero-letter" style="--d:0.15s">I</span><span class="hero-letter" style="--d:0.20s">L</span><span class="hero-letter" style="--d:0.25s">L</span><span class="hero-letter" style="--d:0.30s">I</span><span class="hero-letter hero-letter-dot" style="--d:0.38s">.</span>
+          </h1>
+        </div>
+
+        <div class="hero-bottom">
+          <p class="hero-tagline font-display">Da lavoura.<br>À xícara.</p>
+          <div class="scroll-hint" aria-hidden="true">
+            <span class="scroll-hint-label">Role</span>
+            <span class="scroll-mouse"><span class="scroll-dot"></span></span>
+          </div>
+          <p class="hero-locale">Café especial 100% Arábica<br>Caconde, São Paulo, Brasil</p>
+        </div>
+      </div>
+
+      <!-- cursor spotlight on hero -->
+      <div class="hero-spotlight" id="heroSpotlight" aria-hidden="true"></div>
+    </section>
+    </div>
+
+    <!-- ============ PRODUCT FORMULA / SECOND SCREEN ============ -->
+    <section id="product" class="product-formula" aria-labelledby="productFormulaTitle">
+      <div class="product-formula-inner">
+        <div class="product-formula-copy">
+          <div class="eyebrow product-formula-eyebrow" data-reveal><span class="eyebrow-num">02</span><span class="eyebrow-sep">/</span>O produto</div>
+          <h2 id="productFormulaTitle" data-reveal>Café especial, frio, leve e refrescante.</h2>
+          <div class="product-formula-rule" data-reveal-line></div>
+          <p data-reveal>Cold brew de café especial sabor limão, extraído a frio, gaseificado e pronto para beber. Produzido com café 100% Arábica do Sítio Boa Vista do Engano, em Caconde/SP.</p>
+          <div class="product-formula-stats" data-reveal>
+            <span><b>100%</b> Arábica</span>
+            <i aria-hidden="true">·</i>
+            <span><b>20 anos</b> 2006—2026</span>
+          </div>
+        </div>
+        <div class="product-formula-visual" data-reveal>
+          <div class="product-formula-glow" aria-hidden="true"></div>
+          <img src="assets/cold-brew-front.png" alt="Lata de Cold Brew de Café Especial Café Bazilli sabor limão">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CAFÉ BAZILLI / THIRD SCREEN TURNTABLE ============ -->
+    <section id="cold-brew" class="can-turntable" aria-labelledby="coldBrewTitle">
+      <div class="can-turntable-sticky">
+        <div class="can-turntable-ambient" aria-hidden="true"></div>
+
+        <header class="can-turntable-header">
+          <div class="can-turntable-heading">
+            <div class="eyebrow"><span class="eyebrow-num">03</span><span class="eyebrow-sep">/</span>Conheça a lata</div>
+            <h2>A lata em três capítulos.</h2>
+          </div>
+          <p class="can-turntable-counter tabular"><span data-can-counter>01</span> / 03</p>
+        </header>
+
+        <div class="can-turntable-grid">
+          <div class="can-turntable-copy" aria-live="polite">
+            <article class="can-copy-panel is-active" data-can-copy="0">
+              <p class="can-copy-kicker">Café Bazilli · sabor limão</p>
+              <h2 id="coldBrewTitle">Cold Brew de Café Especial sabor limão.</h2>
+              <p>Extraído a frio, gaseificado e pronto para beber. Uma combinação leve e aromática entre o café especial e o frescor do limão. Não contém glúten.</p>
+            </article>
+            <article class="can-copy-panel" data-can-copy="1" aria-hidden="true">
+              <p class="can-copy-kicker">Origem vulcânica · 100% Arábica</p>
+              <h2>Do Sítio Boa Vista do Engano para a sua lata.</h2>
+              <p>Feito com Arábica Mundo Novo cultivado pela família Bazilli em Caconde/SP, na Região Vulcânica. O rótulo leva a casa, a lavoura e a origem desta história.</p>
+            </article>
+            <article class="can-copy-panel" data-can-copy="2" aria-hidden="true">
+              <p class="can-copy-kicker">Edição comemorativa · 2006—2026</p>
+              <h2>Vinte anos de Café Bazilli em uma nova forma.</h2>
+              <p>Criada para celebrar os 20 anos da marca. Alérgicos: contém derivados de soja. Fenilcetonúricos: contém fenilalanina. Gire para conhecer os detalhes da embalagem.</p>
+            </article>
+
+            <a class="can-turntable-cta" href="https://www.cafebazilli.com.br/product-page/cold-brew-de-cafe-especial-sabor-limao" target="_blank" rel="noreferrer">Comprar a lata <span aria-hidden="true">↗</span></a>
+          </div>
+
+          <div class="can-turntable-visual" aria-label="Lata de Cold Brew Café Bazilli girando conforme a rolagem">
+            <div class="can-halo" aria-hidden="true"></div>
+            <div class="can-frame-stack">
+              <img class="can-frame is-active" data-can-frame="0" src="assets/cold-brew-front.png" alt="Frente da lata de Cold Brew Café Bazilli sabor limão">
+              <img class="can-frame" data-can-frame="1" src="assets/cold-brew-history.png" alt="Lateral da lata com a história do Sítio Boa Vista do Engano">
+              <img class="can-frame" data-can-frame="2" src="assets/cold-brew-back.png" alt="Verso da lata com informações nutricionais">
+            </div>
+            <p class="can-turntable-hint"><span aria-hidden="true">↕</span> Role para girar</p>
+          </div>
+        </div>
+
+        <div class="can-turntable-progress" aria-hidden="true"><span data-can-progress></span></div>
+      </div>
+    </section>
+
+    <!-- ============ FLAVORS ============ -->
+    <section id="flavors" class="flavors">
+      <div class="flavors-stage">
+        <div class="flavor-tint" data-tint="0" aria-hidden="true" style="--tint: rgba(176,101,63,0.19)"></div>
+        <div class="flavor-tint" data-tint="1" aria-hidden="true" style="--tint: rgba(232,201,160,0.19)"></div>
+        <div class="flavor-tint" data-tint="2" aria-hidden="true" style="--tint: rgba(201,181,200,0.19)"></div>
+
+        <header class="flavors-header">
+          <div class="flavors-header-row">
+            <div class="eyebrow" data-reveal><span class="eyebrow-num">04</span><span class="eyebrow-sep">/</span>Nossos cafés</div>
+            <div class="flavor-counter tabular">1 / 3</div>
+          </div>
+          <h2 class="flavors-title" data-reveal>Três cafés, uma origem.</h2>
+        </header>
+
+        <div class="flavors-body">
+          <!-- left column : content panes -->
+          <div class="flavor-content">
+            <div class="flavor-pane is-active" data-flavor-pane="0">
+              <div class="flavor-kicker" data-stage-item="true"><span class="wordmark-sm">BAZILLI.01</span><span class="text-mist">edição limitada</span></div>
+              <h3 class="flavor-name" data-stage-item="true">Microlote<span class="flavor-dot-text">.</span></h3>
+              <p class="flavor-note font-serif-italic" data-stage-item="true">Natural · Honey · Lavado</p>
+              <p class="flavor-desc" data-stage-item="true">Edições limitadas, selecionadas por origem, rastreabilidade e identidade sensorial. Cada microlote revela uma expressão diferente da produção da família Bazilli.</p>
+              <div class="rule" data-stage-item="true" data-reveal-line></div>
+              <ul class="ingredient-list" data-stage-item="true">
+                <li><b>30<span class="mg">%</span></b><span>Aroma marcante</span><span class="ing-flag">Destaque</span></li>
+                <li><b>30<span class="mg">%</span></b><span>Doçura natural</span></li>
+                <li><b>20<span class="mg">%</span></b><span>Acidez equilibrada</span></li>
+                <li><b>20<span class="mg">%</span></b><span>Finalização limpa</span></li>
+              </ul>
+              <div class="flavor-total" data-stage-item="true"><span>Torra</span><b class="tabular">Média</b></div>
+            </div>
+
+            <div class="flavor-pane" data-flavor-pane="1">
+              <div class="flavor-kicker" data-stage-item="true"><span class="wordmark-sm">BAZILLI.02</span><span class="text-mist">100% Arábica</span></div>
+              <h3 class="flavor-name" data-stage-item="true">Grãos<span class="flavor-dot-text">.</span></h3>
+              <p class="flavor-note font-serif-italic" data-stage-item="true">Torra média · café especial</p>
+              <p class="flavor-desc" data-stage-item="true">Café torrado em grãos para moer na hora. Uma experiência completa de aroma, doçura e equilíbrio, preservada até o preparo.</p>
+              <div class="rule" data-stage-item="true" data-reveal-line></div>
+              <ul class="ingredient-list" data-stage-item="true">
+                <li><b>35<span class="mg">%</span></b><span>Aroma preservado</span><span class="ing-flag">Destaque</span></li>
+                <li><b>25<span class="mg">%</span></b><span>Doçura natural</span></li>
+                <li><b>20<span class="mg">%</span></b><span>Corpo aveludado</span></li>
+                <li><b>20<span class="mg">%</span></b><span>Finalização longa</span></li>
+              </ul>
+              <div class="flavor-total" data-stage-item="true"><span>Torra</span><b class="tabular">Média</b></div>
+            </div>
+
+            <div class="flavor-pane" data-flavor-pane="2">
+              <div class="flavor-kicker" data-stage-item="true"><span class="wordmark-sm">BAZILLI.03</span><span class="text-mist">prático</span></div>
+              <h3 class="flavor-name" data-stage-item="true">Moído<span class="flavor-dot-text">.</span></h3>
+              <p class="flavor-note font-serif-italic" data-stage-item="true">Torrado e moído · torra média</p>
+              <p class="flavor-desc" data-stage-item="true">Praticidade no preparo diário sem abrir mão da origem. Embalado para preservar as características do café especial da família Bazilli.</p>
+              <div class="rule" data-stage-item="true" data-reveal-line></div>
+              <ul class="ingredient-list" data-stage-item="true">
+                <li><b>30<span class="mg">%</span></b><span>Preparo prático</span><span class="ing-flag">Destaque</span></li>
+                <li><b>30<span class="mg">%</span></b><span>Equilíbrio</span></li>
+                <li><b>20<span class="mg">%</span></b><span>Notas achocolatadas</span></li>
+                <li><b>20<span class="mg">%</span></b><span>Finalização limpa</span></li>
+              </ul>
+              <div class="flavor-total" data-stage-item="true"><span>Torra</span><b class="tabular">Média</b></div>
+            </div>
+          </div>
+
+          <!-- right column : visual -->
+          <div class="flavor-visual">
+            <span class="flavor-numeral tabular" data-numeral="0" aria-hidden="true">01</span>
+            <span class="flavor-numeral tabular" data-numeral="1" aria-hidden="true">02</span>
+            <span class="flavor-numeral tabular" data-numeral="2" aria-hidden="true">03</span>
+            <div class="bloom flavor-bloom" data-bloom style="--bloom-size:58vh;--bloom-color:#b0653f"></div>
+            <div class="bloom flavor-bloom" data-bloom style="--bloom-size:58vh;--bloom-color:#d9a05b"></div>
+            <div class="bloom flavor-bloom" data-bloom style="--bloom-size:58vh;--bloom-color:#8c5b5f"></div>
+            <div class="flavor-canvas-wrap"><canvas id="flavorsCanvas"></canvas></div>
+          </div>
+        </div>
+
+        <div class="flavors-pagination">
+          <button type="button" class="flavor-page is-active tabular" data-flavor-btn="0" aria-label="Ver Microlote">01</button>
+          <button type="button" class="flavor-page tabular" data-flavor-btn="1" aria-label="Ver Grãos">02</button>
+          <button type="button" class="flavor-page tabular" data-flavor-btn="2" aria-label="Ver Moído">03</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ INSIDE ============ -->
+    <section id="inside" class="inside">
+      <header class="inside-header">
+        <div class="eyebrow inside-eyebrow"><span class="eyebrow-num">05</span><span class="eyebrow-sep">·</span>Da lavoura à xícara</div>
+        <h2 class="inside-title font-display-italic" data-reveal>Por dentro.</h2>
+        <div class="inside-pills">
+          <button type="button" class="pill is-active" data-ing-pill="0" style="--d:0s">CAFEZAL</button>
+          <button type="button" class="pill" data-ing-pill="1" style="--d:0.05s">SELEÇÃO</button>
+          <button type="button" class="pill" data-ing-pill="2" style="--d:0.10s">TORRA</button>
+          <button type="button" class="pill" data-ing-pill="3" style="--d:0.15s">QUALIDADE</button>
+        </div>
+      </header>
+
+      <!-- desktop grid -->
+      <div class="inside-grid">
+        <div class="inside-left">
+          <h3 class="inside-wordmark" data-ing-target>
+            <span class="wm-line-1">TERRA</span><span class="wm-line-2">VULCÂNICA</span>
+          </h3>
+          <div class="inside-plant">
+            <svg viewBox="0 0 48 48" width="56" height="56" fill="none" aria-hidden="true">
+              <path data-bot="true" d="M24 44 V10 M24 20 C16 20 12 24 12 30 M24 20 C32 20 36 24 36 30 M24 30 C17 30 13 33 13 38 M24 30 C31 30 35 33 35 38 M24 10 C20 10 17 12 17 15 M24 10 C28 10 31 12 31 15" stroke="rgba(239,237,230,0.65)" stroke-width="1.3" stroke-linecap="round"/>
+            </svg>
+            <p class="font-serif-italic inside-latin">Coffea arábica</p>
+          </div>
+        </div>
+        <div class="inside-visual">
+          <div class="inside-glow" data-ing-target></div>
+          <canvas id="insideCanvas"></canvas>
+        </div>
+        <div class="inside-details">
+          <div class="ing-index tabular">01 / 04</div>
+          <p class="ing-desc">Cafeeiros cultivados em solo vulcânico a cerca de 1.000 m de altitude, em Caconde/SP. A base de tudo: terroir de origem controlada.</p>
+          <dl class="ing-rows">
+            <div class="ing-row"><dt>Origem</dt><dd>Região Vulcânica · Caconde/SP</dd></div>
+            <div class="ing-row"><dt>Papel</dt><dd>Base de sabor</dd></div>
+            <div class="ing-row ing-dose"><dt>Na xícara</dt><dd class="tabular">40% do perfil <span class="dose-track"><span class="dose-fill" data-dose-fill></span></span></dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <!-- mobile deck -->
+      <div class="inside-deck" id="insideDeck">
+        <article class="deck-card">
+          <div class="deck-top"><span class="deck-name">CAFEZAL</span><span class="deck-index tabular">01/04</span></div>
+          <p class="deck-latin font-serif-italic">Terra vulcânica</p>
+          <p class="deck-desc" data-deck-item="true">Cafeeiros cultivados a cerca de 1.000 m de altitude, no Sítio Boa Vista do Engano, em Caconde/SP.</p>
+          <dl class="deck-rows">
+            <div class="ing-row"><dt>Origem</dt><dd>Região Vulcânica</dd></div>
+            <div class="ing-row"><dt>Papel</dt><dd>Base de sabor</dd></div>
+            <div class="ing-row ing-dose"><dt>Perfil</dt><dd class="tabular">40% <span class="dose-track"><span class="dose-fill" style="--dose:0.40;--dose-color:#B0653F"></span></span></dd></div>
+          </dl>
+        </article>
+        <article class="deck-card">
+          <div class="deck-top"><span class="deck-name">SELEÇÃO</span><span class="deck-index tabular">02/04</span></div>
+          <p class="deck-latin font-serif-italic">Colheita seletiva</p>
+          <p class="deck-desc" data-deck-item="true">Os frutos maduros são escolhidos com cuidado para preservar doçura, equilíbrio e identidade de cada lote.</p>
+          <dl class="deck-rows">
+            <div class="ing-row"><dt>Origem</dt><dd>Colheita própria</dd></div>
+            <div class="ing-row"><dt>Papel</dt><dd>Pureza do lote</dd></div>
+            <div class="ing-row ing-dose"><dt>Perfil</dt><dd class="tabular">25% <span class="dose-track"><span class="dose-fill" style="--dose:0.25;--dose-color:#D9A05B"></span></span></dd></div>
+          </dl>
+        </article>
+        <article class="deck-card">
+          <div class="deck-top"><span class="deck-name">TORRA</span><span class="deck-index tabular">03/04</span></div>
+          <p class="deck-latin font-serif-italic">Torra artesanal</p>
+          <p class="deck-desc" data-deck-item="true">Perfis de torra desenvolvidos para revelar a doçura natural e respeitar as características do café.</p>
+          <dl class="deck-rows">
+            <div class="ing-row"><dt>Origem</dt><dd>Torrefação Bazilli</dd></div>
+            <div class="ing-row"><dt>Papel</dt><dd>Expressão aromática</dd></div>
+            <div class="ing-row ing-dose"><dt>Perfil</dt><dd class="tabular">20% <span class="dose-track"><span class="dose-fill" style="--dose:0.20;--dose-color:#8C5B5F"></span></span></dd></div>
+          </dl>
+        </article>
+        <article class="deck-card">
+          <div class="deck-top"><span class="deck-name">QUALIDADE</span><span class="deck-index tabular">04/04</span></div>
+          <p class="deck-latin font-serif-italic">Controle em cada etapa</p>
+          <p class="deck-desc" data-deck-item="true">Da lavoura à embalagem, cada café passa pela curadoria da família Bazilli para chegar fresco à xícara.</p>
+          <dl class="deck-rows">
+            <div class="ing-row"><dt>Origem</dt><dd>Família Bazilli</dd></div>
+            <div class="ing-row"><dt>Papel</dt><dd>Consistência</dd></div>
+            <div class="ing-row ing-dose"><dt>Perfil</dt><dd class="tabular">15% <span class="dose-track"><span class="dose-fill" style="--dose:0.15;--dose-color:#6F8A62"></span></span></dd></div>
+          </dl>
+        </article>
+      </div>
+      <div class="deck-pagination">
+        <button type="button" class="deck-page is-active tabular" data-deck-btn="0" aria-label="Ver cafezal">01</button>
+        <button type="button" class="deck-page tabular" data-deck-btn="1" aria-label="Ver seleção">02</button>
+        <button type="button" class="deck-page tabular" data-deck-btn="2" aria-label="Ver torra">03</button>
+        <button type="button" class="deck-page tabular" data-deck-btn="3" aria-label="Ver qualidade">04</button>
+      </div>
+
+      <div class="inside-tagline">DA LAVOURA À XÍCARA. 100% ARÁBICA. TORRA ARTESANAL.</div>
+    </section>
+
+    <!-- ============ STORY ============ -->
+    <section id="story" class="story">
+      <div class="story-scroller" id="storyScroller">
+        <div class="story-pinned">
+
+          <!-- giant outlined years -->
+          <span class="story-year-bg tabular" data-year-bg="0" aria-hidden="true">16</span>
+          <span class="story-year-bg tabular" data-year-bg="1" aria-hidden="true">07</span>
+          <span class="story-year-bg tabular" data-year-bg="2" aria-hidden="true">13</span>
+          <span class="story-year-bg tabular" data-year-bg="3" aria-hidden="true">20</span>
+          <span class="story-year-bg tabular" data-year-bg="4" aria-hidden="true">24</span>
+
+          <!-- intro overlay -->
+          <div class="story-intro">
+            <div class="eyebrow" data-reveal><span class="eyebrow-num">06</span><span class="eyebrow-sep">/</span>História</div>
+            <h2 class="story-title" data-reveal>Uma família, cinco capítulos.</h2>
+            <p class="story-intro-copy" data-reveal>A história do Café Bazilli é a história da família Bazilli nos cafezais de Caconde. Desde 1916, o café é acompanhado da lavoura à xícara — com amor pelo que se faz.</p>
+            <div class="scroll-hint story-scroll-hint" aria-hidden="true"><span class="scroll-hint-label">Role</span><span class="scroll-line"></span></div>
+          </div>
+
+          <!-- stage -->
+          <div class="story-stage">
+            <div class="story-image-panel" data-story-panel="0">
+              <figure class="story-figure" style="--ph:linear-gradient(150deg,#dfe3e0 0%,#bcd3d8 55%,#8fa8ae 100%)">
+                <div class="story-ph-tag tabular">FIG. 01</div>
+              </figure>
+              <div class="story-figcap"><span class="fig-dot" aria-hidden="true"></span>Os primeiros cafezais, Caconde/SP, 1916</div>
+            </div>
+            <div class="story-image-panel" data-story-panel="1">
+              <figure class="story-figure" style="--ph:linear-gradient(150deg,#e3ded4 0%,#d4b896 55%,#a8846a 100%)">
+                <div class="story-ph-tag tabular">FIG. 02</div>
+              </figure>
+              <div class="story-figcap"><span class="fig-dot" aria-hidden="true"></span>O café servido ao Papa Bento XVI, 2007</div>
+            </div>
+            <div class="story-image-panel" data-story-panel="2">
+              <figure class="story-figure" style="--ph:linear-gradient(150deg,#e7e0d6 0%,#e8c9a0 55%,#b9946a 100%)">
+                <div class="story-ph-tag tabular">FIG. 03</div>
+              </figure>
+              <div class="story-figcap"><span class="fig-dot" aria-hidden="true"></span>Em Aparecida, para o Papa Francisco, 2013</div>
+            </div>
+            <div class="story-image-panel" data-story-panel="3">
+              <figure class="story-figure" style="--ph:linear-gradient(150deg,#e6dfe4 0%,#c9b5c8 55%,#9a7f99 100%)">
+                <div class="story-ph-tag tabular">FIG. 04</div>
+              </figure>
+              <div class="story-figcap"><span class="fig-dot" aria-hidden="true"></span>Roberta e a nova geração na torra, 2020</div>
+            </div>
+            <div class="story-image-panel" data-story-panel="4">
+              <figure class="story-figure" style="--ph:linear-gradient(150deg,#e2e4d8 0%,#b5c8b0 55%,#7d9378 100%)">
+                <div class="story-ph-tag tabular">FIG. 05</div>
+              </figure>
+              <div class="story-figcap"><span class="fig-dot" aria-hidden="true"></span>Vice-campeã do Torrefação do Ano, 2024</div>
+            </div>
+
+            <!-- chapter text (left) -->
+            <div class="story-chapters">
+              <div class="story-chapter is-active" data-chapter="0">
+                <div class="chapter-eyebrow" data-story-item="true">Capítulo 01<span class="cx">·</span><span>1916</span></div>
+                <h3 class="chapter-title" data-story-item="true">Cafezais de uma vida.</h3>
+                <div class="rule" data-story-item="true" data-reveal-line></div>
+                <p class="chapter-copy" data-story-item="true">Em 1916 a família Bazilli começou a cultivar café em Caconde, no Sítio Boa Vista do Engano. Quatro gerações depois, a mesma terra continua dando origem a cafés especiais.</p>
+              </div>
+              <div class="story-chapter" data-chapter="1">
+                <div class="chapter-eyebrow" data-story-item="true">Capítulo 02<span class="cx">·</span><span>2007</span></div>
+                <h3 class="chapter-title" data-story-item="true">Um café para Bento XVI.</h3>
+                <div class="rule" data-story-item="true" data-reveal-line></div>
+                <p class="chapter-copy" data-story-item="true">O café produzido pela família esteve entre os sabores brasileiros apresentados ao Papa Bento XVI, um capítulo de orgulho que atravessou gerações.</p>
+              </div>
+              <div class="story-chapter" data-chapter="2">
+                <div class="chapter-eyebrow" data-story-item="true">Capítulo 03<span class="cx">·</span><span>2013</span></div>
+                <h3 class="chapter-title" data-story-item="true">Aparecida e Papa Francisco.</h3>
+                <div class="rule" data-story-item="true" data-reveal-line></div>
+                <p class="chapter-copy" data-story-item="true">Em Aparecida, o café voltou a participar de um encontro histórico durante a visita do Papa Francisco ao Brasil.</p>
+              </div>
+              <div class="story-chapter" data-chapter="3">
+                <div class="chapter-eyebrow" data-story-item="true">Capítulo 04<span class="cx">·</span><span>2020</span></div>
+                <h3 class="chapter-title" data-story-item="true">A nova geração.</h3>
+                <div class="rule" data-story-item="true" data-reveal-line></div>
+                <p class="chapter-copy" data-story-item="true">Roberta Bazilli fortaleceu a torra artesanal e aproximou ainda mais a produção da experiência de quem prepara e prova cada xícara.</p>
+              </div>
+              <div class="story-chapter" data-chapter="4">
+                <div class="chapter-eyebrow" data-story-item="true">Capítulo 05<span class="cx">·</span><span>2024</span></div>
+                <h3 class="chapter-title" data-story-item="true">Torrefação do Ano.</h3>
+                <div class="rule" data-story-item="true" data-reveal-line></div>
+                <p class="chapter-copy" data-story-item="true">O Café Bazilli conquistou o vice-campeonato nacional do Torrefação do Ano Brasil, reafirmando uma trajetória de técnica, origem e afeto.</p>
+              </div>
+            </div>
+
+            <!-- progress rail + year nav (desktop) -->
+            <div class="story-nav">
+              <span class="story-rail" aria-hidden="true"><span class="story-rail-fill" id="storyRailFill"></span></span>
+              <ul class="story-years">
+                <li><button type="button" class="story-year-btn is-active tabular" data-year-btn="0" aria-label="Ir para 1916">1916</button></li>
+                <li><button type="button" class="story-year-btn tabular" data-year-btn="1" aria-label="Ir para 2007">2007</button></li>
+                <li><button type="button" class="story-year-btn tabular" data-year-btn="2" aria-label="Ir para 2013">2013</button></li>
+                <li><button type="button" class="story-year-btn tabular" data-year-btn="3" aria-label="Ir para 2020">2020</button></li>
+                <li><button type="button" class="story-year-btn tabular" data-year-btn="4" aria-label="Ir para 2024">2024</button></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- bottom year nav (mobile) -->
+          <div class="story-years-mobile">
+            <button type="button" class="story-year-btn is-active tabular" data-year-btn-m="0" aria-label="Ir para 1916">1916</button>
+            <button type="button" class="story-year-btn tabular" data-year-btn-m="1" aria-label="Ir para 2007">2007</button>
+            <button type="button" class="story-year-btn tabular" data-year-btn-m="2" aria-label="Ir para 2013">2013</button>
+            <button type="button" class="story-year-btn tabular" data-year-btn-m="3" aria-label="Ir para 2020">2020</button>
+            <button type="button" class="story-year-btn tabular" data-year-btn-m="4" aria-label="Ir para 2024">2024</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PRESS ============ -->
+    <section id="press" class="press">
+      <div class="press-header">
+        <div class="eyebrow" data-reveal><span class="eyebrow-num">07</span><span class="eyebrow-sep">/</span>Reconhecimentos</div>
+        <h2 class="press-title" data-reveal>Títulos e afetos.</h2>
+      </div>
+
+      <div class="press-quotes">
+        <figure class="press-quote" data-reveal>
+          <blockquote>“Diante de tantos títulos, não poderíamos esquecer do mais importante: amor pelo que faz!”</blockquote>
+          <figcaption>Café Bazilli</figcaption>
+        </figure>
+        <figure class="press-quote" data-reveal style="--d:0.1s">
+          <blockquote>Vice-campeã nacional do Torrefação do Ano Brasil, em 2024.</blockquote>
+          <figcaption>Torrefação do Ano</figcaption>
+        </figure>
+        <figure class="press-quote" data-reveal style="--d:0.2s">
+          <blockquote>Uma parada obrigatória no mapa dos apaixonados por café.</blockquote>
+          <figcaption>Rotas do Café de São Paulo</figcaption>
+        </figure>
+      </div>
+
+      <!-- marquee rows -->
+      <div class="marquee marquee--filled">
+        <div class="marquee-track">
+          <div class="marquee-group">
+            <span>Santo Café</span><i></i><span>Torrefação do Ano</span><i></i><span>Rotas do Café</span><i></i><span>Q-Grader</span><i></i><span>Caconde/SP</span><i></i>
+          </div>
+          <div class="marquee-group">
+            <span>Santo Café</span><i></i><span>Torrefação do Ano</span><i></i><span>Rotas do Café</span><i></i><span>Q-Grader</span><i></i><span>Caconde/SP</span><i></i>
+          </div>
+        </div>
+      </div>
+      <div class="marquee marquee--outline marquee--reverse">
+        <div class="marquee-track">
+          <div class="marquee-group">
+            <span>Santo Café</span><i></i><span>Torrefação do Ano</span><i></i><span>Rotas do Café</span><i></i><span>Q-Grader</span><i></i><span>Região Vulcânica</span><i></i>
+          </div>
+          <div class="marquee-group">
+            <span>Santo Café</span><i></i><span>Torrefação do Ano</span><i></i><span>Rotas do Café</span><i></i><span>Q-Grader</span><i></i><span>Região Vulcânica</span><i></i>
+          </div>
+        </div>
+      </div>
+      <p class="sr-only">Reconhecimentos: Santo Café, Torrefação do Ano, Rotas do Café, Q-Grader, Região Vulcânica, Caconde/SP.</p>
+    </section>
+
+    <!-- ============ SHOP / WHERE AVAILABLE ============ -->
+    <section id="shop" class="shop">
+      <div class="shop-inner">
+        <div class="eyebrow" data-reveal><span class="eyebrow-num">08</span><span class="eyebrow-sep">/</span>Onde encontrar</div>
+        <h2 class="shop-title" data-reveal>Visite o sítio, ou compre online.</h2>
+
+        <div class="stockists" id="stockists">
+          <div class="stockist-col" data-city="Caconde/SP" data-city-color="#b0653f">
+            <button type="button" class="stockist-head">
+              <h3>Caconde/SP</h3>
+              <svg class="stockist-chevron" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 9 L12 15 L18 9"></path></svg>
+            </button>
+            <div class="stockist-rule"></div>
+            <ul class="stockist-list">
+              <li data-stockist-item="true"><a href="#shop"><span class="stock-sweep" aria-hidden="true"></span><span class="stock-info"><b>Sítio Boa Vista do Engano</b><span>Visitação guiada</span></span><span class="stock-arrow" aria-hidden="true">→</span></a></li>
+              <li data-stockist-item="true"><a href="#shop"><span class="stock-sweep" aria-hidden="true"></span><span class="stock-info"><b>Chalé das Eras</b><span>Hospedagem no sítio</span></span><span class="stock-arrow" aria-hidden="true">→</span></a></li>
+              <li data-stockist-item="true"><a href="#shop"><span class="stock-sweep" aria-hidden="true"></span><span class="stock-info"><b>Rotas do Café de SP</b><span>Parada oficial</span></span><span class="stock-arrow" aria-hidden="true">→</span></a></li>
+              <li data-stockist-item="true"><a href="#shop"><span class="stock-sweep" aria-hidden="true"></span><span class="stock-info"><b>Colheita no café</b><span>Experiência sazonal</span></span><span class="stock-arrow" aria-hidden="true">→</span></a></li>
+              <li data-stockist-item="true"><a href="#shop"><span class="stock-sweep" aria-hidden="true"></span><span class="stock-info"><b>Degustação</b><span>Torra do dia</span></span><span class="stock-arrow" aria-hidden="true">→</span></a></li>
+            </ul>
+          </div>
+          <div class="stockist-col" data-city="todo o Brasil" data-city-color="#d9a05b">
+            <button type="button" class="stockist-head">
+              <h3>Loja oficial</h3>
+              <svg class="stockist-chevron" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 9 L12 15 L18 9"></path></svg>
+            </button>
+            <div class="stockist-rule"></div>
+            <ul class="stockist-list">
+              <li data-stockist-item="true"><a href="#shop"><span class="stock-sweep" aria-hidden="true"></span><span class="stock-info"><b>Grãos e moído</b><span>Envio para todo o Brasil</span></span><span class="stock-arrow" aria-hidden="true">→</span></a></li>
+              <li data-stockist-item="true"><a href="#shop"><span class="stock-sweep" aria-hidden="true"></span><span class="stock-info"><b>Microlotes</b><span>Edições limitadas</span></span><span class="stock-arrow" aria-hidden="true">→</span></a></li>
+              <li data-stockist-item="true"><a href="#shop"><span class="stock-sweep" aria-hidden="true"></span><span class="stock-info"><b>Cápsulas</b><span>Compatíveis com Nespresso®</span></span><span class="stock-arrow" aria-hidden="true">→</span></a></li>
+              <li data-stockist-item="true"><a href="#shop"><span class="stock-sweep" aria-hidden="true"></span><span class="stock-info"><b>Drip Coffee</b><span>Leve para onde for</span></span><span class="stock-arrow" aria-hidden="true">→</span></a></li>
+              <li data-stockist-item="true"><a href="#shop"><span class="stock-sweep" aria-hidden="true"></span><span class="stock-info"><b>WhatsApp</b><span>(19) 98132-6177</span></span><span class="stock-arrow" aria-hidden="true">→</span></a></li>
+            </ul>
+          </div>
+          <div class="stockist-col" data-city="Rotas do Café" data-city-color="#8c5b5f">
+            <button type="button" class="stockist-head">
+              <h3>Rotas do Café</h3>
+              <svg class="stockist-chevron" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 9 L12 15 L18 9"></path></svg>
+            </button>
+            <div class="stockist-rule"></div>
+            <ul class="stockist-list">
+              <li data-stockist-item="true"><a href="#shop"><span class="stock-sweep" aria-hidden="true"></span><span class="stock-info"><b>São Paulo</b><span>Estado do café paulista</span></span><span class="stock-arrow" aria-hidden="true">→</span></a></li>
+              <li data-stockist-item="true"><a href="#shop"><span class="stock-sweep" aria-hidden="true"></span><span class="stock-info"><b>Região Vulcânica</b><span>Terroir de origem</span></span><span class="stock-arrow" aria-hidden="true">→</span></a></li>
+              <li data-stockist-item="true"><a href="#shop"><span class="stock-sweep" aria-hidden="true"></span><span class="stock-info"><b>Rota oficial</b><span>rotasdocafe.sp.gov.br</span></span><span class="stock-arrow" aria-hidden="true">→</span></a></li>
+              <li data-stockist-item="true"><a href="#shop"><span class="stock-sweep" aria-hidden="true"></span><span class="stock-info"><b>Eventos e feiras</b><span>Cafés especiais</span></span><span class="stock-arrow" aria-hidden="true">→</span></a></li>
+              <li data-stockist-item="true"><a href="#shop"><span class="stock-sweep" aria-hidden="true"></span><span class="stock-info"><b>Histórias da família</b><span>Imprensa e café</span></span><span class="stock-arrow" aria-hidden="true">→</span></a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="coming-soon" data-reveal>
+          <div class="coming-label">ENVIO PARA TODO O BRASIL</div>
+          <div class="coming-cities"><span>Caconde</span><i aria-hidden="true">·</i><span>São Paulo</span><i aria-hidden="true">·</i><span>Região Vulcânica</span><i aria-hidden="true">·</i><span>Minas Gerais</span><i aria-hidden="true">·</i><span>Rio de Janeiro</span></div>
+        </div>
+
+        <div class="order-direct">
+          <span class="od-line od-line--l" data-reveal-line></span>
+          <span class="od-label" data-reveal>OU COMPRE ONLINE</span>
+          <span class="od-line od-line--r" data-reveal-line></span>
+        </div>
+
+        <div class="product-grid">
+          <article class="product-card" data-reveal style="--d:0s">
+            <div class="can-stage">
+              <div class="can-shadow" aria-hidden="true"></div>
+              <svg class="can" viewBox="0 0 120 220" role="img" aria-label="Saco de café BAZILLI.01 Grãos">
+                <defs><linearGradient id="bag1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d9a05b"/><stop offset="0.5" stop-color="#f2e3c4"/><stop offset="1" stop-color="#c08a45"/></linearGradient></defs>
+                <path d="M40 36 L80 36 L86 188 Q86 198 76 198 L44 198 Q34 198 34 188 Z" fill="url(#bag1)"/>
+                <path d="M40 36 L80 36 L86 188 Q86 198 76 198 L44 198 Q34 198 34 188 Z" fill="none" stroke="#a06a2e" stroke-width="1"/>
+                <rect x="36" y="44" width="48" height="10" rx="3" fill="#a06a2e" opacity=".85"/>
+                <circle cx="60" cy="80" r="8" fill="none" stroke="#7a4f22" stroke-width="1.4"/><circle cx="60" cy="80" r="2.4" fill="#7a4f22"/>
+                <text x="60" y="112" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="900" font-size="15" fill="#241a12">BAZILLI</text>
+                <text x="60" y="130" text-anchor="middle" font-family="Newsreader, serif" font-size="14" fill="#241a12">Grãos</text>
+                <text x="60" y="148" text-anchor="middle" font-family="Inter, sans-serif" font-size="6" letter-spacing="1.2" fill="#6b4a24">100% ARÁBICA · TORRA MÉDIA</text>
+                <text x="60" y="176" text-anchor="middle" font-family="Inter, sans-serif" font-size="5" letter-spacing=".8" fill="#6b4a24">CAFÉ ESPECIAL DA LAVOURA</text>
+                <text x="60" y="183" text-anchor="middle" font-family="Inter, sans-serif" font-size="5" letter-spacing=".8" fill="#6b4a24">À XÍCARA</text>
+              </svg>
+            </div>
+            <div class="product-name-row"><span class="wordmark-sm">BAZILLI.01</span><span class="pm-sep">·</span><span class="pm-name font-display">Grãos</span></div>
+            <p class="product-flavor">Café torrado em grãos</p>
+            <p class="product-tagline">Para moer na hora e explorar cada método.</p>
+            <div class="pack-pills">
+              <button type="button" class="pack-pill is-active">250 g</button>
+              <button type="button" class="pack-pill">500 g</button>
+            </div>
+            <div class="product-price"><span class="wordmark-sm">R$58</span><span>BRL</span></div>
+            <p class="product-subscribe font-serif-italic">Assine e ganhe 15%</p>
+            <button type="button" class="add-btn" data-add-to-cart="BAZILLI.01 Grãos">ADICIONAR AO CARRINHO</button>
+            <button type="button" class="sublink">Assinar e receber <span aria-hidden="true">→</span></button>
+          </article>
+
+          <article class="product-card" data-reveal style="--d:0.12s">
+            <div class="can-stage">
+              <div class="can-shadow" aria-hidden="true"></div>
+              <svg class="can" viewBox="0 0 120 220" role="img" aria-label="Saco de café BAZILLI.02 Microlote">
+                <defs><linearGradient id="bag2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c9855f"/><stop offset="0.5" stop-color="#f0dccb"/><stop offset="1" stop-color="#b0653f"/></linearGradient></defs>
+                <path d="M40 36 L80 36 L86 188 Q86 198 76 198 L44 198 Q34 198 34 188 Z" fill="url(#bag2)"/>
+                <path d="M40 36 L80 36 L86 188 Q86 198 76 198 L44 198 Q34 198 34 188 Z" fill="none" stroke="#8c4d2c" stroke-width="1"/>
+                <rect x="36" y="44" width="48" height="10" rx="3" fill="#8c4d2c" opacity=".85"/>
+                <circle cx="60" cy="80" r="8" fill="none" stroke="#6d3a20" stroke-width="1.4"/><circle cx="60" cy="80" r="2.4" fill="#6d3a20"/>
+                <text x="60" y="112" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="900" font-size="15" fill="#241a12">BAZILLI</text>
+                <text x="60" y="130" text-anchor="middle" font-family="Newsreader, serif" font-size="14" fill="#241a12">Microlote</text>
+                <text x="60" y="148" text-anchor="middle" font-family="Inter, sans-serif" font-size="6" fill="#6b3a20">NATURAL · HONEY · LAVADO</text>
+                <text x="60" y="176" text-anchor="middle" font-family="Inter, sans-serif" font-size="5" fill="#6b3a20">EDIÇÃO LIMITADA · SELEÇÃO</text>
+                <text x="60" y="183" text-anchor="middle" font-family="Inter, sans-serif" font-size="5" fill="#6b3a20">LOTE A LOTE</text>
+              </svg>
+            </div>
+            <div class="product-name-row"><span class="wordmark-sm">BAZILLI.02</span><span class="pm-sep">·</span><span class="pm-name font-display">Microlote</span></div>
+            <p class="product-flavor">Natural · Honey · Lavado</p>
+            <p class="product-tagline">Edições limitadas, selecionadas lote a lote.</p>
+            <div class="pack-pills">
+              <button type="button" class="pack-pill is-active">250 g</button>
+              <button type="button" class="pack-pill">500 g</button>
+            </div>
+            <div class="product-price"><span class="wordmark-sm">R$69</span><span>BRL</span></div>
+            <p class="product-subscribe font-serif-italic">Assine e ganhe 15%</p>
+            <button type="button" class="add-btn" data-add-to-cart="BAZILLI.02 Microlote">ADICIONAR AO CARRINHO</button>
+            <button type="button" class="sublink">Assinar e receber <span aria-hidden="true">→</span></button>
+          </article>
+
+          <article class="product-card" data-reveal style="--d:0.24s">
+            <div class="can-stage">
+              <div class="can-shadow" aria-hidden="true"></div>
+              <svg class="can" viewBox="0 0 120 220" role="img" aria-label="Saco de café BAZILLI.03 Moído">
+                <defs><linearGradient id="bag3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a8767a"/><stop offset="0.5" stop-color="#e6d3d5"/><stop offset="1" stop-color="#8c5b5f"/></linearGradient></defs>
+                <path d="M40 36 L80 36 L86 188 Q86 198 76 198 L44 198 Q34 198 34 188 Z" fill="url(#bag3)"/>
+                <path d="M40 36 L80 36 L86 188 Q86 198 76 198 L44 198 Q34 198 34 188 Z" fill="none" stroke="#6e3f43" stroke-width="1"/>
+                <rect x="36" y="44" width="48" height="10" rx="3" fill="#6e3f43" opacity=".85"/>
+                <circle cx="60" cy="80" r="8" fill="none" stroke="#543032" stroke-width="1.4"/><circle cx="60" cy="80" r="2.4" fill="#543032"/>
+                <text x="60" y="112" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="900" font-size="15" fill="#241a12">BAZILLI</text>
+                <text x="60" y="130" text-anchor="middle" font-family="Newsreader, serif" font-size="14" fill="#241a12">Moído</text>
+                <text x="60" y="148" text-anchor="middle" font-family="Inter, sans-serif" font-size="6" fill="#5d3639">TORRADO E MOÍDO · TORRA MÉDIA</text>
+                <text x="60" y="176" text-anchor="middle" font-family="Inter, sans-serif" font-size="5" fill="#5d3639">EMBALADO A VÁCUO · PRÁTICO</text>
+                <text x="60" y="183" text-anchor="middle" font-family="Inter, sans-serif" font-size="5" fill="#5d3639">PARA O DIA A DIA</text>
+              </svg>
+            </div>
+            <div class="product-name-row"><span class="wordmark-sm">BAZILLI.03</span><span class="pm-sep">·</span><span class="pm-name font-display">Moído</span></div>
+            <p class="product-flavor">Café torrado e moído</p>
+            <p class="product-tagline">Praticidade no preparo diário, com origem.</p>
+            <div class="pack-pills">
+              <button type="button" class="pack-pill is-active">250 g</button>
+              <button type="button" class="pack-pill">500 g</button>
+            </div>
+            <div class="product-price"><span class="wordmark-sm">R$58</span><span>BRL</span></div>
+            <p class="product-subscribe font-serif-italic">Assine e ganhe 15%</p>
+            <button type="button" class="add-btn" data-add-to-cart="BAZILLI.03 Moído">ADICIONAR AO CARRINHO</button>
+            <button type="button" class="sublink">Assinar e receber <span aria-hidden="true">→</span></button>
+          </article>
+        </div>
+
+        <!-- mobile range -->
+        <div class="mobile-range">
+          <div class="mr-label" data-reveal>A LINHA</div>
+          <h3 class="mr-title font-display" data-reveal>Compre online.</h3>
+          <div class="mr-thumbs">
+            <button type="button" class="mr-thumb" data-reveal style="--d:0s" data-add-to-cart="BAZILLI.01 Grãos">
+              <span class="mr-can"><span class="mr-glow" style="--mr-c:#d9a05b"></span><svg viewBox="0 0 120 220" aria-hidden="true"><path d="M40 36 L80 36 L86 188 Q86 198 76 198 L44 198 Q34 198 34 188 Z" fill="#d9a05b"/></svg></span>
+              <span class="mr-name font-display">Grãos</span>
+              <span class="mr-price tabular">R$58</span>
+              <span class="mr-view">Ver <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5 L16 12 L9 19"></path></svg></span>
+            </button>
+            <button type="button" class="mr-thumb" data-reveal style="--d:0.1s" data-add-to-cart="BAZILLI.02 Microlote">
+              <span class="mr-can"><span class="mr-glow" style="--mr-c:#b0653f"></span><svg viewBox="0 0 120 220" aria-hidden="true"><path d="M40 36 L80 36 L86 188 Q86 198 76 198 L44 198 Q34 198 34 188 Z" fill="#b0653f"/></svg></span>
+              <span class="mr-name font-display">Microlote</span>
+              <span class="mr-price tabular">R$69</span>
+              <span class="mr-view">Ver <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5 L16 12 L9 19"></path></svg></span>
+            </button>
+            <button type="button" class="mr-thumb" data-reveal style="--d:0.2s" data-add-to-cart="BAZILLI.03 Moído">
+              <span class="mr-can"><span class="mr-glow" style="--mr-c:#8c5b5f"></span><svg viewBox="0 0 120 220" aria-hidden="true"><path d="M40 36 L80 36 L86 188 Q86 198 76 198 L44 198 Q34 198 34 188 Z" fill="#8c5b5f"/></svg></span>
+              <span class="mr-name font-display">Moído</span>
+              <span class="mr-price tabular">R$58</span>
+              <span class="mr-view">Ver <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5 L16 12 L9 19"></path></svg></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-news">
+          <div class="foot-label">Newsletter</div>
+          <h2 class="footer-title font-display" data-reveal>Receba novidades de lotes, torras e visitação.</h2>
+        </div>
+        <div class="footer-form-wrap">
+          <form class="footer-form" id="footerForm" novalidate>
+            <label for="footer-email" class="sr-only">Seu e-mail</label>
+            <input id="footer-email" type="email" required placeholder="Seu e-mail">
+            <button type="submit">Cadastrar</button>
+          </form>
+          <p class="footer-status" id="footerStatus" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <div class="footer-cols">
+        <div class="footer-brand">
+          <span class="wordmark">BAZILLI<span class="wordmark-dot" aria-hidden="true"></span></span>
+          <p class="footer-brand-copy">Café especial 100% Arábica, do Sítio Boa Vista do Engano, em Caconde/SP.</p>
+        </div>
+        <div class="footer-col">
+          <span class="foot-label">Site</span>
+          <ul>
+            <li><a href="#flavors">Cafés</a></li>
+            <li><a href="#inside">Origem</a></li>
+            <li><a href="#story">História</a></li>
+            <li><a href="#stockists">Onde comprar</a></li>
+            <li><a href="#shop">Loja</a></li>
+          </ul>
+        </div>
+        <div class="footer-col footer-legal">
+          <span class="foot-label">Legal</span>
+          <ul>
+            <li><a href="#">Privacidade</a></li>
+            <li><a href="#">Termos</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Café Bazilli.</span>
+        <span>Sítio Boa Vista do Engano · Caconde/SP, Brasil.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ CART DRAWER ============ -->
+  <div class="overlay" id="cartOverlay"></div>
+  <aside class="cart" id="cartDrawer" role="dialog" aria-label="Carrinho" aria-hidden="true">
+    <div class="cart-head">
+      <h2 class="font-display">Carrinho<span class="cart-count tabular">0</span></h2>
+      <button type="button" class="cart-close" id="cartCloseBtn" aria-label="Fechar carrinho">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5 L19 19 M19 5 L5 19"></path></svg>
+      </button>
+    </div>
+    <div class="cart-body">
+      <p class="cart-empty-title font-display">Seu carrinho está vazio.</p>
+      <p class="cart-empty-sub">Café da lavoura à xícara.</p>
+      <button type="button" class="cart-continue" id="cartContinueBtn">Continuar</button>
+    </div>
+  </aside>
+
+  <!-- ============ CHECKOUT MODAL ============ -->
+  <div class="overlay" id="checkoutOverlay"></div>
+  <div class="checkout" id="checkoutModal" role="dialog" aria-label="Pedidos online">
+    <button type="button" class="checkout-close" id="checkoutCloseBtn" aria-label="Fechar">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5 L19 19 M19 5 L5 19"></path></svg>
+    </button>
+    <div class="checkout-eyebrow">Pedidos online</div>
+    <h3 class="checkout-title font-display">Envio para todo o Brasil.</h3>
+    <p class="checkout-copy">Os cafés são enviados de Caconde/SP para todo o Brasil. Deixe seu e-mail e avisaremos quando sua cidade estiver na rota.</p>
+    <form class="checkout-form" id="checkoutForm">
+      <label for="checkout-email" class="sr-only">Seu e-mail</label>
+      <input id="checkout-email" type="email" placeholder="seuemail@exemplo.com" required>
+      <button type="submit">Avisar-me</button>
+    </form>
+    <a href="#stockists" class="checkout-stockists" id="checkoutStockists">Encontre onde comprar</a>
+  </div>
+
+  <!-- ============ CURSOR ============ -->
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+  <div class="pouring-tip" id="pouringTip" aria-hidden="true">
+    <div class="pt-bloom" id="ptBloom"></div>
+    <span class="pt-label" id="ptLabel">Servindo em Caconde/SP</span>
+  </div>
+
+  <script type="module" src="hero-product.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
