@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Dino Coffee",
+    "source": "https://www.cafebazilli.com.br/product-page/cafe-especial-nanolote-dino-coffee",
+    "image": "cafe-dino.png"
+  },
+  {
+    "name": "Cápsulas",
+    "source": "https://www.cafebazilli.com.br/product-page/capsulas-de-cafe-especial-10-unidades",
+    "image": "cafe-capsulas.png"
+  },
+  {
+    "name": "Drip Coffee",
+    "source": "https://www.cafebazilli.com.br/product-page/caixinha-drip-coffee",
+    "image": "cafe-drip.png"
+  },
+  {
+    "name": "Cold Brew",
+    "source": "https://www.cafebazilli.com.br/product-page/cold-brew-de-cafe-especial-sabor-limao",
+    "image": "cold-brew-front.png"
+  }
+]

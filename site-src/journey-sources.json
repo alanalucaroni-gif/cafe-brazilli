@@ -1,0 +1,78 @@
+{
+  "source": "https://www.cafebazilli.com.br/",
+  "checked": "2026-09-11",
+  "stages": [
+    {
+      "label": "A lavoura",
+      "title": "Tudo começa em Caconde.",
+      "description": "No Sítio Boa Vista do Engano, a família Bazilli cultiva café na Região Vulcânica de São Paulo. Uma história de produção própria que começou em 1916.",
+      "facts": [
+        [
+          "Origem",
+          "Caconde · São Paulo"
+        ],
+        [
+          "Café",
+          "100% Arábica"
+        ]
+      ],
+      "image": "jornada-lavoura.jpg",
+      "alt": "Frutos de café na lavoura, em fotografia do acervo Bazilli",
+      "caption": "O fruto, antes de se tornar café."
+    },
+    {
+      "label": "A seleção",
+      "title": "Cuidado em cada etapa.",
+      "description": "A família acompanha a colheita, o processamento, a secagem e a seleção. Nos microlotes, o processo e o perfil sensorial mudam conforme a edição e a colheita.",
+      "facts": [
+        [
+          "Produção",
+          "Acompanhada pela família"
+        ],
+        [
+          "Microlotes",
+          "Seleção sazonal"
+        ]
+      ],
+      "image": "jornada-colheita.jpg",
+      "alt": "Colheita do café em fotografia do acervo Bazilli",
+      "caption": "Da colheita à seleção de cada lote."
+    },
+    {
+      "label": "A torra",
+      "title": "A origem ganha expressão.",
+      "description": "Roberta Bazilli, produtora, Q-Grader e mestre de torra, acompanha a seleção e a torra artesanal. O trabalho valoriza as características de cada café.",
+      "facts": [
+        [
+          "Torra",
+          "Artesanal"
+        ],
+        [
+          "Curadoria",
+          "Roberta Bazilli"
+        ]
+      ],
+      "image": "cafe-graos.png",
+      "alt": "Embalagem do café Bazilli em grãos, com indicação de torra média",
+      "caption": "Café em grãos · torra média e artesanal."
+    },
+    {
+      "label": "A xícara",
+      "title": "Agora, no seu tempo.",
+      "description": "Escolha o café em grãos para moer na hora ou a praticidade do moído. Ajuste a moagem ao seu método e prepare a quantidade que vai saborear.",
+      "facts": [
+        [
+          "Em grãos",
+          "Moer na hora"
+        ],
+        [
+          "Moído",
+          "Praticidade no preparo"
+        ]
+      ],
+      "image": "jornada-xicara.jpg",
+      "alt": "Café servido, em fotografia do acervo Bazilli",
+      "caption": "Da nossa origem ao seu ritual."
+    }
+  ]
+}

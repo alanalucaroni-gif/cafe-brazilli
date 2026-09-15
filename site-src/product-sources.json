@@ -1,0 +1,86 @@
+{
+  "checked": "2026-09-11",
+  "products": [
+    {
+      "name": "Microlote",
+      "tag": "produção limitada",
+      "note": "Sazonal · 100% Arábica",
+      "desc": "Lotes selecionados a cada colheita, com origem no Sítio Boa Vista do Engano. O processamento e o perfil sensorial variam conforme a edição disponível.",
+      "facts": [
+        [
+          "250 g",
+          "Conteúdo"
+        ],
+        [
+          "Arábica",
+          "Espécie"
+        ],
+        [
+          "Sazonal",
+          "Seleção dos lotes"
+        ],
+        [
+          "À escolha",
+          "Grãos ou moagem para seu método"
+        ]
+      ],
+      "roast": "Artesanal",
+      "url": "https://www.cafebazilli.com.br/product-page/cafe-microlote-natural-honey-red-honey-250g",
+      "img": "32cbcf_3c8efd3b637240edafe06f8ee87e7938~mv2.png"
+    },
+    {
+      "name": "Grãos",
+      "tag": "edição 20 anos",
+      "note": "Torra média · para moer na hora",
+      "desc": "Café especial de Caconde/SP, cultivado a 1.100 metros. Grãos selecionados de peneira 17 acima, com torra artesanal conduzida por Roberta Bazilli.",
+      "facts": [
+        [
+          "250 g",
+          "Conteúdo"
+        ],
+        [
+          "Arábica",
+          "Espécie"
+        ],
+        [
+          "1.100 m",
+          "Altitude de cultivo"
+        ],
+        [
+          "17 acima",
+          "Peneira dos grãos"
+        ]
+      ],
+      "roast": "Média e artesanal",
+      "url": "https://www.cafebazilli.com.br/product-page/caf%C3%A9-especial-em-gr%C3%A3os-250g",
+      "img": "32cbcf_b5b61ff6b1114d4aba4f52d4339c82f0~mv2.png"
+    },
+    {
+      "name": "Moído",
+      "tag": "embalado a vácuo",
+      "note": "Café especial · pronto para preparar",
+      "desc": "Café 100% Arábica produzido em Caconde/SP, torrado artesanalmente e já moído. A embalagem a vácuo ajuda a preservar aroma e frescor até a abertura.",
+      "facts": [
+        [
+          "250 g",
+          "Conteúdo"
+        ],
+        [
+          "Arábica",
+          "Espécie"
+        ],
+        [
+          "Moído",
+          "Apresentação"
+        ],
+        [
+          "A vácuo",
+          "Embalagem"
+        ]
+      ],
+      "roast": "Artesanal",
+      "url": "https://www.cafebazilli.com.br/product-page/cafe-especial-torrado-e-moido-250g",
+      "img": "32cbcf_350f23d4269b4f3fa880b36789cbbbb6~mv2.png"
+    }
+  ]
+}

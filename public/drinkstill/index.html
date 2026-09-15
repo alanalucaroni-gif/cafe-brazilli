@@ -9,12 +9,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Inter:wght@400;500;600;800;900&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=history-flow-24">
 </head>
 <body>
 
   <!-- ============ FILM GRAIN ============ -->
   <div class="grain-overlay" aria-hidden="true"></div>
+  <div class="page-progress" aria-hidden="true"><span id="pageProgressBar"></span></div>
 
   <!-- ============ NAV ============ -->
   <nav id="nav" class="nav" aria-label="Navegação principal">
@@ -68,26 +69,36 @@
 
       <!-- dark ink layer revealed by growing circle -->
       <div class="hero-ink" id="heroInk">
-        <div class="bloom" data-bloom style="--bloom-color:#c9855f"></div>
+        <div class="bloom" data-bloom style="--bloom-color:#38835a"></div>
         <div class="hero-particles"><canvas id="heroCanvas"></canvas></div>
         <div class="hero-product-scene" id="heroProductScene" aria-hidden="true">
-          <video id="heroProductVideo" class="hero-product-video" muted playsinline preload="auto" poster="assets/cold-brew-front.png">
-            <source src="assets/cold-brew-rotation-alpha-v3.webm" type="video/webm">
-          </video>
+          <img class="product-ingredients" src="assets/coffee-lime.png" alt="" aria-hidden="true" width="1254" height="1254">
+          <canvas id="heroProductFrames" class="hero-product-video" width="520" height="720" aria-hidden="true"></canvas>
           <img class="hero-product-poster" src="assets/cold-brew-front.png" alt="">
         </div>
-        <div class="hero-support" data-support>
-          <div class="eyebrow" data-support-item="true"><span class="eyebrow-num">01</span><span class="eyebrow-sep">/</span>A origem</div>
-          <h2 class="hero-support-title" data-support-item="true">Café especial 100% Arábica, da lavoura à xícara.</h2>
-          <div class="rule" data-support-rule="true" data-reveal-line></div>
-          <p class="hero-support-copy" data-support-item="true">Produzido pela família Bazilli no Sítio Boa Vista do Engano, em Caconde/SP, na Região Vulcânica. Torrado artesanalmente, em pequenos lotes.</p>
-          <div class="hero-support-stats" data-support-item="true">
-            <span><b>1.000</b> m de altitude</span>
-            <span aria-hidden="true" class="stat-sep">·</span>
-            <span><b>1916</b> no café</span>
+      </div>
+
+    <section id="product" class="product-formula" aria-labelledby="productFormulaTitle">
+      <div class="product-formula-inner">
+        <div class="product-formula-copy">
+          <div class="eyebrow product-formula-eyebrow" data-reveal><span class="eyebrow-num">02</span><span class="eyebrow-sep">/</span>O produto</div>
+          <h2 id="productFormulaTitle" data-reveal>Café especial.<br>Extraído a frio.</h2>
+          <div class="product-formula-rule" data-reveal-line></div>
+          <p data-reveal>Cold brew de café especial sabor limão, extraído a frio, gaseificado e pronto para beber. Produzido com café 100% Arábica do Sítio Boa Vista do Engano, em Caconde/SP.</p>
+          <div class="product-formula-stats" data-reveal>
+            <span><b>100%</b> Arábica</span>
+            <i aria-hidden="true">·</i>
+            <span><b>Limão</b> sabor</span>
           </div>
+          <dl class="product-facts" data-reveal>
+            <div><dt>Extração</dt><dd>A frio</dd></div>
+            <div><dt>Perfil</dt><dd>Gaseificado e refrescante</dd></div>
+            <div><dt>Origem</dt><dd>Caconde, São Paulo</dd></div>
+            <div><dt>Consumo</dt><dd>Pronto para beber</dd></div>
+          </dl>
         </div>
       </div>
+    </section>
 
       <!-- bone hero face -->
       <div class="hero-face">
@@ -113,74 +124,10 @@
     </div>
 
     <!-- ============ PRODUCT FORMULA / SECOND SCREEN ============ -->
-    <section id="product" class="product-formula" aria-labelledby="productFormulaTitle">
-      <div class="product-formula-inner">
-        <div class="product-formula-copy">
-          <div class="eyebrow product-formula-eyebrow" data-reveal><span class="eyebrow-num">02</span><span class="eyebrow-sep">/</span>O produto</div>
-          <h2 id="productFormulaTitle" data-reveal>Café especial, frio, leve e refrescante.</h2>
-          <div class="product-formula-rule" data-reveal-line></div>
-          <p data-reveal>Cold brew de café especial sabor limão, extraído a frio, gaseificado e pronto para beber. Produzido com café 100% Arábica do Sítio Boa Vista do Engano, em Caconde/SP.</p>
-          <div class="product-formula-stats" data-reveal>
-            <span><b>100%</b> Arábica</span>
-            <i aria-hidden="true">·</i>
-            <span><b>20 anos</b> 2006—2026</span>
-          </div>
-        </div>
-        <div class="product-formula-visual" data-reveal>
-          <div class="product-formula-glow" aria-hidden="true"></div>
-          <img src="assets/cold-brew-front.png" alt="Lata de Cold Brew de Café Especial Café Bazilli sabor limão">
-        </div>
-      </div>
-    </section>
+
 
     <!-- ============ CAFÉ BAZILLI / THIRD SCREEN TURNTABLE ============ -->
-    <section id="cold-brew" class="can-turntable" aria-labelledby="coldBrewTitle">
-      <div class="can-turntable-sticky">
-        <div class="can-turntable-ambient" aria-hidden="true"></div>
 
-        <header class="can-turntable-header">
-          <div class="can-turntable-heading">
-            <div class="eyebrow"><span class="eyebrow-num">03</span><span class="eyebrow-sep">/</span>Conheça a lata</div>
-            <h2>A lata em três capítulos.</h2>
-          </div>
-          <p class="can-turntable-counter tabular"><span data-can-counter>01</span> / 03</p>
-        </header>
-
-        <div class="can-turntable-grid">
-          <div class="can-turntable-copy" aria-live="polite">
-            <article class="can-copy-panel is-active" data-can-copy="0">
-              <p class="can-copy-kicker">Café Bazilli · sabor limão</p>
-              <h2 id="coldBrewTitle">Cold Brew de Café Especial sabor limão.</h2>
-              <p>Extraído a frio, gaseificado e pronto para beber. Uma combinação leve e aromática entre o café especial e o frescor do limão. Não contém glúten.</p>
-            </article>
-            <article class="can-copy-panel" data-can-copy="1" aria-hidden="true">
-              <p class="can-copy-kicker">Origem vulcânica · 100% Arábica</p>
-              <h2>Do Sítio Boa Vista do Engano para a sua lata.</h2>
-              <p>Feito com Arábica Mundo Novo cultivado pela família Bazilli em Caconde/SP, na Região Vulcânica. O rótulo leva a casa, a lavoura e a origem desta história.</p>
-            </article>
-            <article class="can-copy-panel" data-can-copy="2" aria-hidden="true">
-              <p class="can-copy-kicker">Edição comemorativa · 2006—2026</p>
-              <h2>Vinte anos de Café Bazilli em uma nova forma.</h2>
-              <p>Criada para celebrar os 20 anos da marca. Alérgicos: contém derivados de soja. Fenilcetonúricos: contém fenilalanina. Gire para conhecer os detalhes da embalagem.</p>
-            </article>
-
-            <a class="can-turntable-cta" href="https://www.cafebazilli.com.br/product-page/cold-brew-de-cafe-especial-sabor-limao" target="_blank" rel="noreferrer">Comprar a lata <span aria-hidden="true">↗</span></a>
-          </div>
-
-          <div class="can-turntable-visual" aria-label="Lata de Cold Brew Café Bazilli girando conforme a rolagem">
-            <div class="can-halo" aria-hidden="true"></div>
-            <div class="can-frame-stack">
-              <img class="can-frame is-active" data-can-frame="0" src="assets/cold-brew-front.png" alt="Frente da lata de Cold Brew Café Bazilli sabor limão">
-              <img class="can-frame" data-can-frame="1" src="assets/cold-brew-history.png" alt="Lateral da lata com a história do Sítio Boa Vista do Engano">
-              <img class="can-frame" data-can-frame="2" src="assets/cold-brew-back.png" alt="Verso da lata com informações nutricionais">
-            </div>
-            <p class="can-turntable-hint"><span aria-hidden="true">↕</span> Role para girar</p>
-          </div>
-        </div>
-
-        <div class="can-turntable-progress" aria-hidden="true"><span data-can-progress></span></div>
-      </div>
-    </section>
 
     <!-- ============ FLAVORS ============ -->
     <section id="flavors" class="flavors">
@@ -189,71 +136,66 @@
         <div class="flavor-tint" data-tint="1" aria-hidden="true" style="--tint: rgba(232,201,160,0.19)"></div>
         <div class="flavor-tint" data-tint="2" aria-hidden="true" style="--tint: rgba(201,181,200,0.19)"></div>
 
+<div class="flavor-tint" aria-hidden="true" style="--tint:rgba(80,120,65,.15)"></div>
+<div class="flavor-tint" aria-hidden="true" style="--tint:rgba(80,120,65,.15)"></div>
+<div class="flavor-tint" aria-hidden="true" style="--tint:rgba(80,120,65,.15)"></div>
+<div class="flavor-tint" aria-hidden="true" style="--tint:rgba(80,120,65,.15)"></div>
         <header class="flavors-header">
           <div class="flavors-header-row">
-            <div class="eyebrow" data-reveal><span class="eyebrow-num">04</span><span class="eyebrow-sep">/</span>Nossos cafés</div>
-            <div class="flavor-counter tabular">1 / 3</div>
+            <div class="eyebrow" data-reveal><span class="eyebrow-num">03</span><span class="eyebrow-sep">/</span>Nossos cafés</div>
+            <div class="flavor-counter tabular">1 / 7</div>
           </div>
-          <h2 class="flavors-title" data-reveal>Três cafés, uma origem.</h2>
+          <h2 class="flavors-title" data-reveal>Nossos cafés, uma origem.</h2>
         </header>
 
         <div class="flavors-body">
           <!-- left column : content panes -->
           <div class="flavor-content">
-            <div class="flavor-pane is-active" data-flavor-pane="0">
-              <div class="flavor-kicker" data-stage-item="true"><span class="wordmark-sm">BAZILLI.01</span><span class="text-mist">edição limitada</span></div>
-              <h3 class="flavor-name" data-stage-item="true">Microlote<span class="flavor-dot-text">.</span></h3>
-              <p class="flavor-note font-serif-italic" data-stage-item="true">Natural · Honey · Lavado</p>
-              <p class="flavor-desc" data-stage-item="true">Edições limitadas, selecionadas por origem, rastreabilidade e identidade sensorial. Cada microlote revela uma expressão diferente da produção da família Bazilli.</p>
-              <div class="rule" data-stage-item="true" data-reveal-line></div>
-              <ul class="ingredient-list" data-stage-item="true">
-                <li><b>30<span class="mg">%</span></b><span>Aroma marcante</span><span class="ing-flag">Destaque</span></li>
-                <li><b>30<span class="mg">%</span></b><span>Doçura natural</span></li>
-                <li><b>20<span class="mg">%</span></b><span>Acidez equilibrada</span></li>
-                <li><b>20<span class="mg">%</span></b><span>Finalização limpa</span></li>
-              </ul>
-              <div class="flavor-total" data-stage-item="true"><span>Torra</span><b class="tabular">Média</b></div>
-            </div>
-
-            <div class="flavor-pane" data-flavor-pane="1">
-              <div class="flavor-kicker" data-stage-item="true"><span class="wordmark-sm">BAZILLI.02</span><span class="text-mist">100% Arábica</span></div>
-              <h3 class="flavor-name" data-stage-item="true">Grãos<span class="flavor-dot-text">.</span></h3>
-              <p class="flavor-note font-serif-italic" data-stage-item="true">Torra média · café especial</p>
-              <p class="flavor-desc" data-stage-item="true">Café torrado em grãos para moer na hora. Uma experiência completa de aroma, doçura e equilíbrio, preservada até o preparo.</p>
-              <div class="rule" data-stage-item="true" data-reveal-line></div>
-              <ul class="ingredient-list" data-stage-item="true">
-                <li><b>35<span class="mg">%</span></b><span>Aroma preservado</span><span class="ing-flag">Destaque</span></li>
-                <li><b>25<span class="mg">%</span></b><span>Doçura natural</span></li>
-                <li><b>20<span class="mg">%</span></b><span>Corpo aveludado</span></li>
-                <li><b>20<span class="mg">%</span></b><span>Finalização longa</span></li>
-              </ul>
-              <div class="flavor-total" data-stage-item="true"><span>Torra</span><b class="tabular">Média</b></div>
-            </div>
-
-            <div class="flavor-pane" data-flavor-pane="2">
-              <div class="flavor-kicker" data-stage-item="true"><span class="wordmark-sm">BAZILLI.03</span><span class="text-mist">prático</span></div>
-              <h3 class="flavor-name" data-stage-item="true">Moído<span class="flavor-dot-text">.</span></h3>
-              <p class="flavor-note font-serif-italic" data-stage-item="true">Torrado e moído · torra média</p>
-              <p class="flavor-desc" data-stage-item="true">Praticidade no preparo diário sem abrir mão da origem. Embalado para preservar as características do café especial da família Bazilli.</p>
-              <div class="rule" data-stage-item="true" data-reveal-line></div>
-              <ul class="ingredient-list" data-stage-item="true">
-                <li><b>30<span class="mg">%</span></b><span>Preparo prático</span><span class="ing-flag">Destaque</span></li>
-                <li><b>30<span class="mg">%</span></b><span>Equilíbrio</span></li>
-                <li><b>20<span class="mg">%</span></b><span>Notas achocolatadas</span></li>
-                <li><b>20<span class="mg">%</span></b><span>Finalização limpa</span></li>
-              </ul>
-              <div class="flavor-total" data-stage-item="true"><span>Torra</span><b class="tabular">Média</b></div>
-            </div>
-          </div>
-
+<div class="flavor-pane is-active" data-flavor-pane="0">
+ <div class="flavor-kicker" data-stage-item="true"><span class="wordmark-sm">BAZILLI.01</span><span class="text-mist">produção limitada</span></div>
+ <h3 class="flavor-name" data-stage-item="true">Microlote<span class="flavor-dot-text">.</span></h3>
+ <p class="flavor-note font-serif-italic" data-stage-item="true">Sazonal · 100% Arábica</p>
+ <p class="flavor-desc" data-stage-item="true">Lotes selecionados a cada colheita, com origem no Sítio Boa Vista do Engano. O processamento e o perfil sensorial variam conforme a edição disponível.</p>
+ <ul class="ingredient-list verified-facts" data-stage-item="true"><li><b>250 g</b><span>Conteúdo</span></li><li><b>Arábica</b><span>Espécie</span></li><li><b>Sazonal</b><span>Seleção dos lotes</span></li><li><b>À escolha</b><span>Grãos ou moagem para seu método</span></li></ul><div class="flavor-total" data-stage-item="true"><span>Torra</span><b>Artesanal</b></div>
+ <a class="flavor-source" href="https://www.cafebazilli.com.br/product-page/cafe-microlote-natural-honey-red-honey-250g" target="_blank" rel="noopener noreferrer">Ver detalhes na loja oficial ↗</a>
+ </div>
+<div class="flavor-pane " data-flavor-pane="1">
+ <div class="flavor-kicker" data-stage-item="true"><span class="wordmark-sm">BAZILLI.02</span><span class="text-mist">edição 20 anos</span></div>
+ <h3 class="flavor-name" data-stage-item="true">Grãos<span class="flavor-dot-text">.</span></h3>
+ <p class="flavor-note font-serif-italic" data-stage-item="true">Torra média · para moer na hora</p>
+ <p class="flavor-desc" data-stage-item="true">Café especial de Caconde/SP, cultivado a 1.100 metros. Grãos selecionados de peneira 17 acima, com torra artesanal conduzida por Roberta Bazilli.</p>
+ <ul class="ingredient-list verified-facts" data-stage-item="true"><li><b>250 g</b><span>Conteúdo</span></li><li><b>Arábica</b><span>Espécie</span></li><li><b>1.100 m</b><span>Altitude de cultivo</span></li><li><b>17 acima</b><span>Peneira dos grãos</span></li></ul><div class="flavor-total" data-stage-item="true"><span>Torra</span><b>Média e artesanal</b></div>
+ <a class="flavor-source" href="https://www.cafebazilli.com.br/product-page/caf%C3%A9-especial-em-gr%C3%A3os-250g" target="_blank" rel="noopener noreferrer">Ver detalhes na loja oficial ↗</a>
+ </div>
+<div class="flavor-pane " data-flavor-pane="2">
+ <div class="flavor-kicker" data-stage-item="true"><span class="wordmark-sm">BAZILLI.03</span><span class="text-mist">embalado a vácuo</span></div>
+ <h3 class="flavor-name" data-stage-item="true">Moído<span class="flavor-dot-text">.</span></h3>
+ <p class="flavor-note font-serif-italic" data-stage-item="true">Café especial · pronto para preparar</p>
+ <p class="flavor-desc" data-stage-item="true">Café 100% Arábica produzido em Caconde/SP, torrado artesanalmente e já moído. A embalagem a vácuo ajuda a preservar aroma e frescor até a abertura.</p>
+ <ul class="ingredient-list verified-facts" data-stage-item="true"><li><b>250 g</b><span>Conteúdo</span></li><li><b>Arábica</b><span>Espécie</span></li><li><b>Moído</b><span>Apresentação</span></li><li><b>A vácuo</b><span>Embalagem</span></li></ul><div class="flavor-total" data-stage-item="true"><span>Torra</span><b>Artesanal</b></div>
+ <a class="flavor-source" href="https://www.cafebazilli.com.br/product-page/cafe-especial-torrado-e-moido-250g" target="_blank" rel="noopener noreferrer">Ver detalhes na loja oficial ↗</a>
+ </div>
+<div class="flavor-pane" data-flavor-pane="3"><div class="flavor-kicker" data-stage-item="true"><span class="wordmark-sm">BAZILLI.04</span><span class="text-mist">nanolote</span></div><h3 class="flavor-name" data-stage-item="true">Dino Coffee<span class="flavor-dot-text">.</span></h3><p class="flavor-note font-serif-italic" data-stage-item="true">Edições limitadas · tradição familiar</p><p class="flavor-desc" data-stage-item="true">Nanolote produzido em Caconde, com seleção cuidadosa e torra artesanal de Roberta Bazilli. Inspirado em Theo, da sexta geração da família, cada edição tem seu próprio perfil.</p><ul class="ingredient-list verified-facts" data-stage-item="true"><li><b>250 g</b><span>Conteúdo</span></li><li><b>Nanolote</b><span>Categoria</span></li><li><b>Limitada</b><span>Produção</span></li><li><b>À escolha</b><span>Moagem</span></li></ul><div class="flavor-total" data-stage-item="true"><span>Torra</span><b>Artesanal</b></div><a class="flavor-source" href="https://www.cafebazilli.com.br/product-page/cafe-especial-nanolote-dino-coffee" target="_blank" rel="noopener noreferrer">Ver detalhes na loja oficial ↗</a></div>
+<div class="flavor-pane" data-flavor-pane="4"><div class="flavor-kicker" data-stage-item="true"><span class="wordmark-sm">BAZILLI.05</span><span class="text-mist">praticidade no preparo</span></div><h3 class="flavor-name" data-stage-item="true">Cápsulas<span class="flavor-dot-text">.</span></h3><p class="flavor-note font-serif-italic" data-stage-item="true">100% Arábica · sistema Nespresso®</p><p class="flavor-desc" data-stage-item="true">Café especial de Caconde em cápsulas, com processo natural e torra média artesanal. Uma opção prática para preparar sua xícara em máquinas compatíveis com o sistema Nespresso®.</p><ul class="ingredient-list verified-facts" data-stage-item="true"><li><b>10</b><span>Cápsulas por caixa</span></li><li><b>Arábica</b><span>Espécie</span></li><li><b>Natural</b><span>Processo</span></li><li><b>Nespresso®</b><span>Sistema compatível</span></li></ul><div class="flavor-total" data-stage-item="true"><span>Torra</span><b>Média e artesanal</b></div><a class="flavor-source" href="https://www.cafebazilli.com.br/product-page/capsulas-de-cafe-especial-10-unidades" target="_blank" rel="noopener noreferrer">Ver detalhes na loja oficial ↗</a></div>
+<div class="flavor-pane" data-flavor-pane="5"><div class="flavor-kicker" data-stage-item="true"><span class="wordmark-sm">BAZILLI.06</span><span class="text-mist">café onde você estiver</span></div><h3 class="flavor-name" data-stage-item="true">Drip Coffee<span class="flavor-dot-text">.</span></h3><p class="flavor-note font-serif-italic" data-stage-item="true">Filtro individual · basta água quente</p><p class="flavor-desc" data-stage-item="true">Café especial em sachês com filtro que se apoia na xícara. Abra, encaixe e acrescente água quente: uma forma simples de levar o Café Bazilli para o trabalho ou a viagem.</p><ul class="ingredient-list verified-facts" data-stage-item="true"><li><b>10</b><span>Sachês por caixa</span></li><li><b>Individual</b><span>Filtro</span></li><li><b>Arábica</b><span>Espécie</span></li><li><b>Água quente</b><span>Preparo</span></li></ul><div class="flavor-total" data-stage-item="true"><span>Formato</span><b>Drip bag</b></div><a class="flavor-source" href="https://www.cafebazilli.com.br/product-page/caixinha-drip-coffee" target="_blank" rel="noopener noreferrer">Ver detalhes na loja oficial ↗</a></div>
+<div class="flavor-pane" data-flavor-pane="6"><div class="flavor-kicker" data-stage-item="true"><span class="wordmark-sm">BAZILLI.07</span><span class="text-mist">edição 20 anos</span></div><h3 class="flavor-name" data-stage-item="true">Cold Brew<span class="flavor-dot-text">.</span></h3><p class="flavor-note font-serif-italic" data-stage-item="true">Extraído a frio · sabor limão</p><p class="flavor-desc" data-stage-item="true">Bebida gaseificada e pronta para beber, feita com café especial 100% Arábica do Sítio Boa Vista do Engano. Edição comemorativa dos 20 anos da marca.</p><ul class="ingredient-list verified-facts" data-stage-item="true"><li><b>A frio</b><span>Extração</span></li><li><b>Limão</b><span>Sabor</span></li><li><b>Gaseificado</b><span>Perfil</span></li><li><b>Pronto</b><span>Consumo</span></li></ul><div class="flavor-total" data-stage-item="true"><span>Edição</span><b>2006–2026</b></div><a class="flavor-source" href="https://www.cafebazilli.com.br/product-page/cold-brew-de-cafe-especial-sabor-limao" target="_blank" rel="noopener noreferrer">Ver detalhes na loja oficial ↗</a></div>
+</div>
           <!-- right column : visual -->
           <div class="flavor-visual">
+<img class="flavor-product-photo is-active" data-flavor-photo="0" src="assets/cafe-microlote.png" alt="Embalagem oficial do Café Bazilli Microlote 250 g" width="1080" height="1080" loading="lazy" decoding="async">
+<img class="flavor-product-photo " data-flavor-photo="1" src="assets/cafe-graos.png" alt="Embalagem oficial do Café Bazilli Grãos 250 g" width="1080" height="1080" loading="lazy" decoding="async">
+<img class="flavor-product-photo " data-flavor-photo="2" src="assets/cafe-moido.png" alt="Embalagem oficial do Café Bazilli Moído 250 g" width="1080" height="1080" loading="lazy" decoding="async">
+
             <span class="flavor-numeral tabular" data-numeral="0" aria-hidden="true">01</span>
             <span class="flavor-numeral tabular" data-numeral="1" aria-hidden="true">02</span>
             <span class="flavor-numeral tabular" data-numeral="2" aria-hidden="true">03</span>
             <div class="bloom flavor-bloom" data-bloom style="--bloom-size:58vh;--bloom-color:#b0653f"></div>
             <div class="bloom flavor-bloom" data-bloom style="--bloom-size:58vh;--bloom-color:#d9a05b"></div>
             <div class="bloom flavor-bloom" data-bloom style="--bloom-size:58vh;--bloom-color:#8c5b5f"></div>
+<img class="flavor-product-photo" data-flavor-photo="3" src="assets/cafe-dino.png" alt="Dino Coffee Café Bazilli" loading="lazy" decoding="async"><span class="flavor-numeral tabular" aria-hidden="true">04</span><div class="bloom flavor-bloom" data-bloom style="--bloom-size:58vh;--bloom-color:#8c9b6d"></div>
+<img class="flavor-product-photo" data-flavor-photo="4" src="assets/cafe-capsulas.png" alt="Cápsulas Café Bazilli" loading="lazy" decoding="async"><span class="flavor-numeral tabular" aria-hidden="true">05</span><div class="bloom flavor-bloom" data-bloom style="--bloom-size:58vh;--bloom-color:#8c9b6d"></div>
+<img class="flavor-product-photo" data-flavor-photo="5" src="assets/cafe-drip.png" alt="Drip Coffee Café Bazilli" loading="lazy" decoding="async"><span class="flavor-numeral tabular" aria-hidden="true">06</span><div class="bloom flavor-bloom" data-bloom style="--bloom-size:58vh;--bloom-color:#8c9b6d"></div>
+<img class="flavor-product-photo" data-flavor-photo="6" src="assets/cold-brew-front.png" alt="Cold Brew Café Bazilli" loading="lazy" decoding="async"><span class="flavor-numeral tabular" aria-hidden="true">07</span><div class="bloom flavor-bloom" data-bloom style="--bloom-size:58vh;--bloom-color:#8c9b6d"></div>
             <div class="flavor-canvas-wrap"><canvas id="flavorsCanvas"></canvas></div>
           </div>
         </div>
@@ -262,220 +204,45 @@
           <button type="button" class="flavor-page is-active tabular" data-flavor-btn="0" aria-label="Ver Microlote">01</button>
           <button type="button" class="flavor-page tabular" data-flavor-btn="1" aria-label="Ver Grãos">02</button>
           <button type="button" class="flavor-page tabular" data-flavor-btn="2" aria-label="Ver Moído">03</button>
+<button type="button" class="flavor-page tabular" data-flavor-btn="3" aria-label="Ver Dino Coffee">04</button>
+<button type="button" class="flavor-page tabular" data-flavor-btn="4" aria-label="Ver Cápsulas">05</button>
+<button type="button" class="flavor-page tabular" data-flavor-btn="5" aria-label="Ver Drip Coffee">06</button>
+<button type="button" class="flavor-page tabular" data-flavor-btn="6" aria-label="Ver Cold Brew">07</button>
         </div>
       </div>
     </section>
 
     <!-- ============ INSIDE ============ -->
-    <section id="inside" class="inside">
-      <header class="inside-header">
-        <div class="eyebrow inside-eyebrow"><span class="eyebrow-num">05</span><span class="eyebrow-sep">·</span>Da lavoura à xícara</div>
-        <h2 class="inside-title font-display-italic" data-reveal>Por dentro.</h2>
-        <div class="inside-pills">
-          <button type="button" class="pill is-active" data-ing-pill="0" style="--d:0s">CAFEZAL</button>
-          <button type="button" class="pill" data-ing-pill="1" style="--d:0.05s">SELEÇÃO</button>
-          <button type="button" class="pill" data-ing-pill="2" style="--d:0.10s">TORRA</button>
-          <button type="button" class="pill" data-ing-pill="3" style="--d:0.15s">QUALIDADE</button>
+    <section id="inside" class="bean-section" aria-labelledby="bean-heading">
+      <header class="bean-header">
+        <div class="eyebrow"><span class="eyebrow-num">04</span><span class="eyebrow-sep">/</span>Da lavoura à xícara</div>
+        <h2 id="bean-heading">Por dentro do <em>grão.</em></h2>
+        <div class="bean-tabs" role="tablist" aria-label="Conheça o café">
+          <button id="bean-tab-0" role="tab" aria-selected="true" aria-controls="bean-info" data-bean-tab="0">O grão</button>
+          <button id="bean-tab-1" role="tab" aria-selected="false" aria-controls="bean-info" tabindex="-1" data-bean-tab="1">A origem</button>
+          <button id="bean-tab-2" role="tab" aria-selected="false" aria-controls="bean-info" tabindex="-1" data-bean-tab="2">A torra</button>
+          <button id="bean-tab-3" role="tab" aria-selected="false" aria-controls="bean-info" tabindex="-1" data-bean-tab="3">O preparo</button>
         </div>
       </header>
-
-      <!-- desktop grid -->
-      <div class="inside-grid">
-        <div class="inside-left">
-          <h3 class="inside-wordmark" data-ing-target>
-            <span class="wm-line-1">TERRA</span><span class="wm-line-2">VULCÂNICA</span>
-          </h3>
-          <div class="inside-plant">
-            <svg viewBox="0 0 48 48" width="56" height="56" fill="none" aria-hidden="true">
-              <path data-bot="true" d="M24 44 V10 M24 20 C16 20 12 24 12 30 M24 20 C32 20 36 24 36 30 M24 30 C17 30 13 33 13 38 M24 30 C31 30 35 33 35 38 M24 10 C20 10 17 12 17 15 M24 10 C28 10 31 12 31 15" stroke="rgba(239,237,230,0.65)" stroke-width="1.3" stroke-linecap="round"/>
-            </svg>
-            <p class="font-serif-italic inside-latin">Coffea arábica</p>
-          </div>
-        </div>
-        <div class="inside-visual">
-          <div class="inside-glow" data-ing-target></div>
-          <canvas id="insideCanvas"></canvas>
-        </div>
-        <div class="inside-details">
-          <div class="ing-index tabular">01 / 04</div>
-          <p class="ing-desc">Cafeeiros cultivados em solo vulcânico a cerca de 1.000 m de altitude, em Caconde/SP. A base de tudo: terroir de origem controlada.</p>
-          <dl class="ing-rows">
-            <div class="ing-row"><dt>Origem</dt><dd>Região Vulcânica · Caconde/SP</dd></div>
-            <div class="ing-row"><dt>Papel</dt><dd>Base de sabor</dd></div>
-            <div class="ing-row ing-dose"><dt>Na xícara</dt><dd class="tabular">40% do perfil <span class="dose-track"><span class="dose-fill" data-dose-fill></span></span></dd></div>
-          </dl>
+      <div class="bean-layout">
+        <div class="bean-name"><h3 id="bean-name">100% <br>ARÁBICA</h3><p id="bean-subtitle">Coffea arabica</p></div>
+        <div class="bean-scene" aria-hidden="true"><div class="bean-halo"></div><div class="bean-tilt"><img class="bean-image" src="assets/coffee-bean.png" alt="" width="1254" height="1254" loading="lazy"></div><div class="bean-shadow"></div></div>
+        <div id="bean-info" class="bean-info" role="tabpanel" aria-labelledby="bean-tab-0" tabindex="0">
+          <span class="bean-count">01 / 04</span><p class="bean-description">Os cafés especiais Bazilli são 100% Arábica. Produção própria e seleção cuidadosa acompanham o grão, da lavoura até a embalagem.</p>
+          <dl><div><dt>Espécie</dt><dd>Coffea arabica</dd></div><div><dt>Seleção</dt><dd>Cafés especiais</dd></div><div><dt>Produção</dt><dd>Família Bazilli</dd></div></dl>
         </div>
       </div>
-
-      <!-- mobile deck -->
-      <div class="inside-deck" id="insideDeck">
-        <article class="deck-card">
-          <div class="deck-top"><span class="deck-name">CAFEZAL</span><span class="deck-index tabular">01/04</span></div>
-          <p class="deck-latin font-serif-italic">Terra vulcânica</p>
-          <p class="deck-desc" data-deck-item="true">Cafeeiros cultivados a cerca de 1.000 m de altitude, no Sítio Boa Vista do Engano, em Caconde/SP.</p>
-          <dl class="deck-rows">
-            <div class="ing-row"><dt>Origem</dt><dd>Região Vulcânica</dd></div>
-            <div class="ing-row"><dt>Papel</dt><dd>Base de sabor</dd></div>
-            <div class="ing-row ing-dose"><dt>Perfil</dt><dd class="tabular">40% <span class="dose-track"><span class="dose-fill" style="--dose:0.40;--dose-color:#B0653F"></span></span></dd></div>
-          </dl>
-        </article>
-        <article class="deck-card">
-          <div class="deck-top"><span class="deck-name">SELEÇÃO</span><span class="deck-index tabular">02/04</span></div>
-          <p class="deck-latin font-serif-italic">Colheita seletiva</p>
-          <p class="deck-desc" data-deck-item="true">Os frutos maduros são escolhidos com cuidado para preservar doçura, equilíbrio e identidade de cada lote.</p>
-          <dl class="deck-rows">
-            <div class="ing-row"><dt>Origem</dt><dd>Colheita própria</dd></div>
-            <div class="ing-row"><dt>Papel</dt><dd>Pureza do lote</dd></div>
-            <div class="ing-row ing-dose"><dt>Perfil</dt><dd class="tabular">25% <span class="dose-track"><span class="dose-fill" style="--dose:0.25;--dose-color:#D9A05B"></span></span></dd></div>
-          </dl>
-        </article>
-        <article class="deck-card">
-          <div class="deck-top"><span class="deck-name">TORRA</span><span class="deck-index tabular">03/04</span></div>
-          <p class="deck-latin font-serif-italic">Torra artesanal</p>
-          <p class="deck-desc" data-deck-item="true">Perfis de torra desenvolvidos para revelar a doçura natural e respeitar as características do café.</p>
-          <dl class="deck-rows">
-            <div class="ing-row"><dt>Origem</dt><dd>Torrefação Bazilli</dd></div>
-            <div class="ing-row"><dt>Papel</dt><dd>Expressão aromática</dd></div>
-            <div class="ing-row ing-dose"><dt>Perfil</dt><dd class="tabular">20% <span class="dose-track"><span class="dose-fill" style="--dose:0.20;--dose-color:#8C5B5F"></span></span></dd></div>
-          </dl>
-        </article>
-        <article class="deck-card">
-          <div class="deck-top"><span class="deck-name">QUALIDADE</span><span class="deck-index tabular">04/04</span></div>
-          <p class="deck-latin font-serif-italic">Controle em cada etapa</p>
-          <p class="deck-desc" data-deck-item="true">Da lavoura à embalagem, cada café passa pela curadoria da família Bazilli para chegar fresco à xícara.</p>
-          <dl class="deck-rows">
-            <div class="ing-row"><dt>Origem</dt><dd>Família Bazilli</dd></div>
-            <div class="ing-row"><dt>Papel</dt><dd>Consistência</dd></div>
-            <div class="ing-row ing-dose"><dt>Perfil</dt><dd class="tabular">15% <span class="dose-track"><span class="dose-fill" style="--dose:0.15;--dose-color:#6F8A62"></span></span></dd></div>
-          </dl>
-        </article>
-      </div>
-      <div class="deck-pagination">
-        <button type="button" class="deck-page is-active tabular" data-deck-btn="0" aria-label="Ver cafezal">01</button>
-        <button type="button" class="deck-page tabular" data-deck-btn="1" aria-label="Ver seleção">02</button>
-        <button type="button" class="deck-page tabular" data-deck-btn="2" aria-label="Ver torra">03</button>
-        <button type="button" class="deck-page tabular" data-deck-btn="3" aria-label="Ver qualidade">04</button>
-      </div>
-
-      <div class="inside-tagline">DA LAVOURA À XÍCARA. 100% ARÁBICA. TORRA ARTESANAL.</div>
+      <p class="bean-signature">UMA ORIGEM. CUIDADO EM CADA GRÃO.</p>
     </section>
+
 
     <!-- ============ STORY ============ -->
-    <section id="story" class="story">
-      <div class="story-scroller" id="storyScroller">
-        <div class="story-pinned">
-
-          <!-- giant outlined years -->
-          <span class="story-year-bg tabular" data-year-bg="0" aria-hidden="true">16</span>
-          <span class="story-year-bg tabular" data-year-bg="1" aria-hidden="true">07</span>
-          <span class="story-year-bg tabular" data-year-bg="2" aria-hidden="true">13</span>
-          <span class="story-year-bg tabular" data-year-bg="3" aria-hidden="true">20</span>
-          <span class="story-year-bg tabular" data-year-bg="4" aria-hidden="true">24</span>
-
-          <!-- intro overlay -->
-          <div class="story-intro">
-            <div class="eyebrow" data-reveal><span class="eyebrow-num">06</span><span class="eyebrow-sep">/</span>História</div>
-            <h2 class="story-title" data-reveal>Uma família, cinco capítulos.</h2>
-            <p class="story-intro-copy" data-reveal>A história do Café Bazilli é a história da família Bazilli nos cafezais de Caconde. Desde 1916, o café é acompanhado da lavoura à xícara — com amor pelo que se faz.</p>
-            <div class="scroll-hint story-scroll-hint" aria-hidden="true"><span class="scroll-hint-label">Role</span><span class="scroll-line"></span></div>
-          </div>
-
-          <!-- stage -->
-          <div class="story-stage">
-            <div class="story-image-panel" data-story-panel="0">
-              <figure class="story-figure" style="--ph:linear-gradient(150deg,#dfe3e0 0%,#bcd3d8 55%,#8fa8ae 100%)">
-                <div class="story-ph-tag tabular">FIG. 01</div>
-              </figure>
-              <div class="story-figcap"><span class="fig-dot" aria-hidden="true"></span>Os primeiros cafezais, Caconde/SP, 1916</div>
-            </div>
-            <div class="story-image-panel" data-story-panel="1">
-              <figure class="story-figure" style="--ph:linear-gradient(150deg,#e3ded4 0%,#d4b896 55%,#a8846a 100%)">
-                <div class="story-ph-tag tabular">FIG. 02</div>
-              </figure>
-              <div class="story-figcap"><span class="fig-dot" aria-hidden="true"></span>O café servido ao Papa Bento XVI, 2007</div>
-            </div>
-            <div class="story-image-panel" data-story-panel="2">
-              <figure class="story-figure" style="--ph:linear-gradient(150deg,#e7e0d6 0%,#e8c9a0 55%,#b9946a 100%)">
-                <div class="story-ph-tag tabular">FIG. 03</div>
-              </figure>
-              <div class="story-figcap"><span class="fig-dot" aria-hidden="true"></span>Em Aparecida, para o Papa Francisco, 2013</div>
-            </div>
-            <div class="story-image-panel" data-story-panel="3">
-              <figure class="story-figure" style="--ph:linear-gradient(150deg,#e6dfe4 0%,#c9b5c8 55%,#9a7f99 100%)">
-                <div class="story-ph-tag tabular">FIG. 04</div>
-              </figure>
-              <div class="story-figcap"><span class="fig-dot" aria-hidden="true"></span>Roberta e a nova geração na torra, 2020</div>
-            </div>
-            <div class="story-image-panel" data-story-panel="4">
-              <figure class="story-figure" style="--ph:linear-gradient(150deg,#e2e4d8 0%,#b5c8b0 55%,#7d9378 100%)">
-                <div class="story-ph-tag tabular">FIG. 05</div>
-              </figure>
-              <div class="story-figcap"><span class="fig-dot" aria-hidden="true"></span>Vice-campeã do Torrefação do Ano, 2024</div>
-            </div>
-
-            <!-- chapter text (left) -->
-            <div class="story-chapters">
-              <div class="story-chapter is-active" data-chapter="0">
-                <div class="chapter-eyebrow" data-story-item="true">Capítulo 01<span class="cx">·</span><span>1916</span></div>
-                <h3 class="chapter-title" data-story-item="true">Cafezais de uma vida.</h3>
-                <div class="rule" data-story-item="true" data-reveal-line></div>
-                <p class="chapter-copy" data-story-item="true">Em 1916 a família Bazilli começou a cultivar café em Caconde, no Sítio Boa Vista do Engano. Quatro gerações depois, a mesma terra continua dando origem a cafés especiais.</p>
-              </div>
-              <div class="story-chapter" data-chapter="1">
-                <div class="chapter-eyebrow" data-story-item="true">Capítulo 02<span class="cx">·</span><span>2007</span></div>
-                <h3 class="chapter-title" data-story-item="true">Um café para Bento XVI.</h3>
-                <div class="rule" data-story-item="true" data-reveal-line></div>
-                <p class="chapter-copy" data-story-item="true">O café produzido pela família esteve entre os sabores brasileiros apresentados ao Papa Bento XVI, um capítulo de orgulho que atravessou gerações.</p>
-              </div>
-              <div class="story-chapter" data-chapter="2">
-                <div class="chapter-eyebrow" data-story-item="true">Capítulo 03<span class="cx">·</span><span>2013</span></div>
-                <h3 class="chapter-title" data-story-item="true">Aparecida e Papa Francisco.</h3>
-                <div class="rule" data-story-item="true" data-reveal-line></div>
-                <p class="chapter-copy" data-story-item="true">Em Aparecida, o café voltou a participar de um encontro histórico durante a visita do Papa Francisco ao Brasil.</p>
-              </div>
-              <div class="story-chapter" data-chapter="3">
-                <div class="chapter-eyebrow" data-story-item="true">Capítulo 04<span class="cx">·</span><span>2020</span></div>
-                <h3 class="chapter-title" data-story-item="true">A nova geração.</h3>
-                <div class="rule" data-story-item="true" data-reveal-line></div>
-                <p class="chapter-copy" data-story-item="true">Roberta Bazilli fortaleceu a torra artesanal e aproximou ainda mais a produção da experiência de quem prepara e prova cada xícara.</p>
-              </div>
-              <div class="story-chapter" data-chapter="4">
-                <div class="chapter-eyebrow" data-story-item="true">Capítulo 05<span class="cx">·</span><span>2024</span></div>
-                <h3 class="chapter-title" data-story-item="true">Torrefação do Ano.</h3>
-                <div class="rule" data-story-item="true" data-reveal-line></div>
-                <p class="chapter-copy" data-story-item="true">O Café Bazilli conquistou o vice-campeonato nacional do Torrefação do Ano Brasil, reafirmando uma trajetória de técnica, origem e afeto.</p>
-              </div>
-            </div>
-
-            <!-- progress rail + year nav (desktop) -->
-            <div class="story-nav">
-              <span class="story-rail" aria-hidden="true"><span class="story-rail-fill" id="storyRailFill"></span></span>
-              <ul class="story-years">
-                <li><button type="button" class="story-year-btn is-active tabular" data-year-btn="0" aria-label="Ir para 1916">1916</button></li>
-                <li><button type="button" class="story-year-btn tabular" data-year-btn="1" aria-label="Ir para 2007">2007</button></li>
-                <li><button type="button" class="story-year-btn tabular" data-year-btn="2" aria-label="Ir para 2013">2013</button></li>
-                <li><button type="button" class="story-year-btn tabular" data-year-btn="3" aria-label="Ir para 2020">2020</button></li>
-                <li><button type="button" class="story-year-btn tabular" data-year-btn="4" aria-label="Ir para 2024">2024</button></li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- bottom year nav (mobile) -->
-          <div class="story-years-mobile">
-            <button type="button" class="story-year-btn is-active tabular" data-year-btn-m="0" aria-label="Ir para 1916">1916</button>
-            <button type="button" class="story-year-btn tabular" data-year-btn-m="1" aria-label="Ir para 2007">2007</button>
-            <button type="button" class="story-year-btn tabular" data-year-btn-m="2" aria-label="Ir para 2013">2013</button>
-            <button type="button" class="story-year-btn tabular" data-year-btn-m="3" aria-label="Ir para 2020">2020</button>
-            <button type="button" class="story-year-btn tabular" data-year-btn-m="4" aria-label="Ir para 2024">2024</button>
-          </div>
-        </div>
-      </div>
-    </section>
+<section id="story" class="story story-editorial story-flow" aria-labelledby="history-title"><div class="story-scroller" id="storyScroller"><div class="story-pinned"><header class="history-header"><div class="eyebrow"><span>05 / História</span></div><h2 id="history-title">O tempo passa.<br><em>A origem permanece.</em></h2></header><div class="history-grains" aria-hidden="true"><img src="assets/coffee-bean.png" alt="" class="history-grain history-grain--one"><img src="assets/coffee-bean.png" alt="" class="history-grain history-grain--two"></div><div class="history-scenes"><article class="history-scene is-active" data-history="0" aria-hidden="false"><span class="history-date" aria-hidden="true">1916</span><div class="history-copy"><span class="history-chapter">Capítulo 01 · 1916</span><h3>Tudo começa<br>na terra.</h3><p>A família Bazilli se dedica ao café desde 1916, no Sítio Boa Vista do Engano, em Caconde. Uma história que continua na mesma origem, da lavoura à xícara.</p></div><figure class="history-photo history-photo--0"><img src="assets/jornada-lavoura.jpg" alt="A lavoura da família Bazilli" loading="lazy" decoding="async"><figcaption>Caconde, São Paulo · imagem atual da propriedade</figcaption></figure></article><article class="history-scene " data-history="1" aria-hidden="true"><span class="history-date" aria-hidden="true">2007</span><div class="history-copy"><span class="history-chapter">Capítulo 02 · 2007</span><h3>Uma xícara<br>para Bento XVI.</h3><p>O Café Bazilli esteve entre os cafés escolhidos para serem servidos ao Papa Bento XVI em sua visita ao Brasil. A origem de Caconde ganhou um novo capítulo.</p></div><figure class="history-photo history-photo--1"><img src="assets/historia-bento.png" alt="Ilustração do Papa Bento XVI publicada pela marca" loading="lazy" decoding="async"><figcaption>Papa Bento XVI · ilustração da marca</figcaption></figure></article><article class="history-scene " data-history="2" aria-hidden="true"><span class="history-date" aria-hidden="true">2013</span><div class="history-copy"><span class="history-chapter">Capítulo 03 · 2013</span><h3>Outro encontro.<br>A mesma origem.</h3><p>Na passagem do Papa Francisco por Aparecida, o Café Bazilli voltou a ser servido em uma visita papal. Um encontro que passou a fazer parte da memória da família.</p></div><figure class="history-photo history-photo--2"><img src="assets/historia-francisco.png" alt="Ilustração do Papa Francisco publicada pela marca" loading="lazy" decoding="async"><figcaption>Papa Francisco · ilustração da marca</figcaption></figure></article><article class="history-scene " data-history="3" aria-hidden="true"><span class="history-date" aria-hidden="true">2024</span><div class="history-copy"><span class="history-chapter">Capítulo 04 · 2024</span><h3>Conhecimento<br>que vira sabor.</h3><p>Roberta Bazilli, produtora, Q-Grader e mestre de torra, foi vice-campeã nacional do Torrefação do Ano Brasil. Técnica e cuidado artesanal em cada lote.</p></div><figure class="history-photo history-photo--3"><img src="assets/historia-roberta.jpg" alt="Roberta Bazilli" loading="lazy" decoding="async"><figcaption>Roberta Bazilli · produtora e mestre de torra</figcaption></figure></article><article class="history-scene " data-history="4" aria-hidden="true"><span class="history-date" aria-hidden="true">2026</span><div class="history-copy"><span class="history-chapter">Capítulo 05 · 2026</span><h3>A história ganha<br>uma nova forma.</h3><p>Nos 20 anos da marca, o café da família chega também em uma lata de Cold Brew sabor limão. Extraído a frio, gaseificado e pronto para beber.</p></div><figure class="history-photo history-photo--4"><img src="assets/cold-brew-front.png" alt="Cold Brew Bazilli edição de 20 anos" loading="lazy" decoding="async"><figcaption>Edição comemorativa · 2006–2026</figcaption></figure></article></div><nav class="history-nav" aria-label="Capítulos da história"><button type="button" data-history-button="0" aria-current="step"><span>01</span>1916</button><button type="button" data-history-button="1" aria-current="false"><span>02</span>2007</button><button type="button" data-history-button="2" aria-current="false"><span>03</span>2013</button><button type="button" data-history-button="3" aria-current="false"><span>04</span>2024</button><button type="button" data-history-button="4" aria-current="false"><span>05</span>2026</button></nav><div class="history-progress" aria-hidden="true"><span></span></div></div></div></section>
 
     <!-- ============ PRESS ============ -->
     <section id="press" class="press">
       <div class="press-header">
-        <div class="eyebrow" data-reveal><span class="eyebrow-num">07</span><span class="eyebrow-sep">/</span>Reconhecimentos</div>
+        <div class="eyebrow" data-reveal><span class="eyebrow-num">06</span><span class="eyebrow-sep">/</span>Reconhecimentos</div>
         <h2 class="press-title" data-reveal>Títulos e afetos.</h2>
       </div>
 
@@ -521,7 +288,7 @@
     <!-- ============ SHOP / WHERE AVAILABLE ============ -->
     <section id="shop" class="shop">
       <div class="shop-inner">
-        <div class="eyebrow" data-reveal><span class="eyebrow-num">08</span><span class="eyebrow-sep">/</span>Onde encontrar</div>
+        <div class="eyebrow" data-reveal><span class="eyebrow-num">07</span><span class="eyebrow-sep">/</span>Onde encontrar</div>
         <h2 class="shop-title" data-reveal>Visite o sítio, ou compre online.</h2>
 
         <div class="stockists" id="stockists">
@@ -788,7 +555,7 @@
     <span class="pt-label" id="ptLabel">Servindo em Caconde/SP</span>
   </div>
 
-  <script type="module" src="hero-product.js"></script>
-  <script src="script.js"></script>
+  <script type="module" src="hero-product.js?v=history-flow-24"></script>
+  <script src="script.js?v=history-flow-24"></script>
 </body>
 </html>

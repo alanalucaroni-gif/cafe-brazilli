@@ -1,0 +1,30 @@
+{
+  "source": "https://www.cafebazilli.com.br/",
+  "chapters": [
+    {
+      "year": "1916",
+      "image": "jornada-lavoura.jpg",
+      "caption": "Caconde, São Paulo · imagem atual da propriedade"
+    },
+    {
+      "year": "2007",
+      "image": "historia-bento.png",
+      "caption": "Papa Bento XVI · imagem do acervo da marca"
+    },
+    {
+      "year": "2013",
+      "image": "historia-francisco.png",
+      "caption": "Papa Francisco · imagem do acervo da marca"
+    },
+    {
+      "year": "2024",
+      "image": "historia-roberta.jpg",
+      "caption": "Roberta Bazilli · produtora e mestre de torra"
+    },
+    {
+      "year": "2026",
+      "image": "cold-brew-front.png",
+      "caption": "Edição comemorativa · 2006–2026"
+    }
+  ]
+}

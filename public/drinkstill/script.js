@@ -23,9 +23,22 @@ const isFinePointer = () => window.matchMedia("(hover: hover) and (pointer: fine
 const hero = $("#hero");
 const heroInk = $("#heroInk");
 const heroScroll = $("#heroScroll");
+// Reuse the opening can: product information shares its sticky stage.
+const productPanel = $("#product");
+
+productPanel.classList.add("product-in-hero");
+productPanel.querySelectorAll("[data-reveal], [data-reveal-line]").forEach(el => el.classList.add("in-view"));
+document.querySelectorAll('a[href="#product"]').forEach(link => {
+  link.addEventListener("click", event => {
+    event.preventDefault();
+    const top = heroScroll.getBoundingClientRect().top + window.scrollY + (heroScroll.offsetHeight - hero.offsetHeight) * 0.75;
+    window.scrollTo({ top: top,
+      behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+  });
+});
 let heroPointerX = window.innerWidth * 0.67;
 let heroPointerY = window.innerHeight * 0.47;
-let heroLensBaseRadius = clamp(Math.min(window.innerWidth, window.innerHeight) * 0.225, 158, 232);
+let heroLensBaseRadius = clamp(Math.min(window.innerWidth, window.innerHeight) * 0.30, 160, 320);
 let heroScrollProgress = 0;
 
 const smoothstep = (edge0, edge1, value) => {
@@ -36,10 +49,11 @@ const smoothstep = (edge0, edge1, value) => {
 function updateHeroScrollTransition() {
   if (!heroScroll) return;
   const trackRect = heroScroll.getBoundingClientRect();
-  const distance = Math.max(1, trackRect.height - window.innerHeight);
+  const distance = Math.max(1, trackRect.height - hero.offsetHeight);
   heroScrollProgress = clamp(-trackRect.top / distance, 0, 1);
-  const expand = smoothstep(0.02, 0.78, heroScrollProgress);
+  const expand = smoothstep(0.16, 0.40, heroScrollProgress);
   const heroRect = hero.getBoundingClientRect();
+  heroLensBaseRadius = clamp(Math.min(heroRect.width, heroRect.height) * 0.30, 160, 320);
   const centerX = heroRect.width / 2;
   const centerY = heroRect.height / 2;
   const lensX = lerp(heroPointerX - heroRect.left, centerX, expand);
@@ -50,6 +64,10 @@ function updateHeroScrollTransition() {
   hero.style.setProperty("--lens-y", `${lensY}px`);
   hero.style.setProperty("--lens-radius", `${lerp(heroLensBaseRadius, coverRadius, expand)}px`);
   hero.style.setProperty("--hero-scroll-progress", heroScrollProgress.toFixed(4));
+  const infoVisible = heroScrollProgress > 0.50;
+  hero.classList.toggle("is-product-info", infoVisible);
+  productPanel.inert = !infoVisible;
+  productPanel.setAttribute("aria-hidden", String(!infoVisible));
 }
 
 window.addEventListener("scroll", updateHeroScrollTransition, { passive: true });
@@ -257,8 +275,7 @@ const flavorField = new ParticleField($("#flavorsCanvas"), {
 });
 flavorField.start();
 
-const insideBotanical = new Botanical($("#insideCanvas"), { color: "#B0653F" });
-insideBotanical.start();
+
 
 /* ============================================================
    3. NAV — solid on scroll, hide on scroll down
@@ -279,6 +296,77 @@ function onNavScroll() {
 }
 window.addEventListener("scroll", onNavScroll, { passive: true });
 onNavScroll();
+
+/* page progress + tactile micro-interactions */
+const pageProgressBar = $("#pageProgressBar");
+let progressTicking = false;
+
+function updatePageProgress() {
+  const distance = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  const progress = clamp(window.scrollY / distance, 0, 1);
+  pageProgressBar.style.transform = `scaleX(${progress.toFixed(4)})`;
+  progressTicking = false;
+}
+
+window.addEventListener("scroll", () => {
+  if (!progressTicking) {
+    progressTicking = true;
+    requestAnimationFrame(updatePageProgress);
+  }
+}, { passive: true });
+updatePageProgress();
+
+const reducedMotionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+const magneticTargets = $$(".nav-shop, .can-turntable-cta, .shop-buy, .checkout-form button, .footer-form button");
+
+magneticTargets.forEach((target) => {
+  target.classList.add("magnetic", "pressable");
+
+  if (isFinePointer() && !reducedMotionPreference.matches) {
+    target.addEventListener("pointermove", (event) => {
+      const rect = target.getBoundingClientRect();
+      const x = (event.clientX - rect.left - rect.width / 2) * 0.16;
+      const y = (event.clientY - rect.top - rect.height / 2) * 0.22;
+      target.style.setProperty("--magnetic-x", `${x.toFixed(1)}px`);
+      target.style.setProperty("--magnetic-y", `${y.toFixed(1)}px`);
+      target.classList.add("is-magnetic");
+    });
+    target.addEventListener("pointerleave", () => {
+      target.classList.remove("is-magnetic");
+      target.style.setProperty("--magnetic-x", "0px");
+      target.style.setProperty("--magnetic-y", "0px");
+    });
+  }
+
+  target.addEventListener("pointerdown", (event) => {
+    if (reducedMotionPreference.matches) return;
+    const rect = target.getBoundingClientRect();
+    const ripple = document.createElement("span");
+    ripple.className = "press-ripple";
+    ripple.style.left = `${event.clientX - rect.left}px`;
+    ripple.style.top = `${event.clientY - rect.top}px`;
+    target.appendChild(ripple);
+    ripple.addEventListener("animationend", () => ripple.remove(), { once: true });
+  });
+});
+
+if (isFinePointer() && !reducedMotionPreference.matches) {
+  $$(".product-formula-visual, .can-turntable-visual").forEach((surface) => {
+    surface.addEventListener("pointermove", (event) => {
+      const rect = surface.getBoundingClientRect();
+      const nx = clamp((event.clientX - rect.left) / Math.max(1, rect.width), 0, 1) - 0.5;
+      const ny = clamp((event.clientY - rect.top) / Math.max(1, rect.height), 0, 1) - 0.5;
+      surface.style.setProperty("--tilt-x", `${(-ny * 3.6).toFixed(2)}deg`);
+      surface.style.setProperty("--tilt-y", `${(nx * 4.8).toFixed(2)}deg`);
+      surface.classList.add("is-tilting");
+    });
+    surface.addEventListener("pointerleave", () => {
+      surface.classList.remove("is-tilting");
+      surface.style.setProperty("--tilt-x", "0deg");
+      surface.style.setProperty("--tilt-y", "0deg");
+    });
+  });
+}
 
 /* ============================================================
    4. MOBILE MENU
@@ -319,42 +407,11 @@ $$("[data-reveal], [data-reveal-line]").forEach((el) => {
   revealObserver.observe(el);
 });
 
-// inside section: reveal wordmark, plant draw and details on first entry
-const insideSec = $("#inside");
-const insideRevealObserver = new IntersectionObserver(
-  (entries) => {
-    for (const e of entries) {
-      if (e.isIntersecting) {
-        $(".inside-wordmark", insideSec).classList.add("is-in");
-        $(".inside-plant", insideSec).classList.add("is-in");
-        $(".inside-details", insideSec).classList.add("in");
-        insideRevealObserver.disconnect();
-      }
-    }
-  },
-  { threshold: 0.3 }
-);
-insideRevealObserver.observe(insideSec);
-
-// deck cards (inside, mobile) observed within horizontal scroller
-const deck = $("#insideDeck");
-const deckCardObserver = new IntersectionObserver(
-  (entries) => {
-    for (const e of entries) {
-      if (e.isIntersecting) {
-        e.target.classList.add("in-view");
-        deckCardObserver.unobserve(e.target);
-      }
-    }
-  },
-  { root: deck, threshold: 0.55 }
-);
-$$(".deck-card", deck).forEach((c) => deckCardObserver.observe(c));
-
 /* ============================================================
    6. FLAVORS STAGE
    ============================================================ */
-const FLAVOR_COLORS = ["176,101,63", "217,160,91", "140,91,95"];
+const FLAVOR_COLORS = ["176,101,63", "217,160,91", "140,91,95", "111,143,80", "207,174,60", "180,110,71", "45,117,78"];
+const coffeeCount = $$(".flavor-pane").length;
 let currentFlavor = 0;
 
 function setFlavor(i) {
@@ -365,7 +422,8 @@ function setFlavor(i) {
   $$(".flavor-tint").forEach((t, idx) => t.classList.toggle("is-active", idx === i));
   $$(".flavor-numeral").forEach((n, idx) => n.classList.toggle("is-active", idx === i));
   $$(".flavor-bloom").forEach((b, idx) => b.classList.toggle("is-active", idx === i));
-  $(".flavor-counter").textContent = `${i + 1} / 3`;
+  $$(".flavor-product-photo").forEach((photo, idx) => { photo.classList.toggle("is-active", idx === i); photo.setAttribute("aria-hidden", String(idx !== i)); });
+  $(".flavor-counter").textContent = `${i + 1} / ${coffeeCount}`;
   flavorField.setColor(FLAVOR_COLORS[i]);
   $$(".flavor-page").forEach((b, idx) => b.classList.toggle("is-active", idx === i));
 }
@@ -375,214 +433,112 @@ $$(".flavor-page").forEach((btn) => btn.addEventListener("click", () => setFlavo
 // arrows: keyboard on pagination
 $$(".flavor-page").forEach((btn) =>
   btn.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight") setFlavor(clamp(currentFlavor + 1, 0, 2));
-    if (e.key === "ArrowLeft") setFlavor(clamp(currentFlavor - 1, 0, 2));
+    if (e.key === "ArrowRight") goCoffee(clamp(currentFlavor + 1, 0, coffeeCount - 1));
+    if (e.key === "ArrowLeft") goCoffee(clamp(currentFlavor - 1, 0, coffeeCount - 1));
   })
 );
 
 /* ============================================================
    7. INSIDE — ingredient pills + mobile deck
    ============================================================ */
-const INGREDIENTS = [
-  {
-    wm: ["TERRA", "VULCÂNICA"],
-    latin: "Coffea arábica",
-    color: "#B0653F",
-    rgb: "176,101,63",
-    index: "01 / 04",
-    desc: "Cafeeiros cultivados em solo vulcânico a cerca de 1.000 m de altitude, em Caconde/SP. A base de tudo: terroir de origem controlada.",
-    source: "Região Vulcânica · Caconde/SP",
-    role: "Base de sabor",
-    dose: "40% do perfil",
-    frac: 0.4,
-  },
-  {
-    wm: ["COLHEITA", "SELETIVA"],
-    latin: "Cerejas maduras",
-    color: "#D9A05B",
-    rgb: "217,160,91",
-    index: "02 / 04",
-    desc: "A seleção começa no campo. Apenas frutos no ponto ideal seguem para o processamento e revelam doçura, limpeza e identidade.",
-    source: "Seleção manual",
-    role: "Doçura e uniformidade",
-    dose: "30% do perfil",
-    frac: 0.3,
-  },
-  {
-    wm: ["TORRA", "ARTESANAL"],
-    latin: "Pequenos lotes",
-    color: "#8C5B5F",
-    rgb: "140,91,95",
-    index: "03 / 04",
-    desc: "Cada lote recebe uma curva de torra própria para equilibrar aroma, acidez, corpo e finalização sem esconder a origem.",
-    source: "Torrefação Bazilli",
-    role: "Expressão sensorial",
-    dose: "20% do perfil",
-    frac: 0.2,
-  },
-  {
-    wm: ["CONTROLE", "DE QUALIDADE"],
-    latin: "Da lavoura à xícara",
-    color: "#46624B",
-    rgb: "70,98,75",
-    index: "04 / 04",
-    desc: "Rastreabilidade, prova e consistência acompanham o café em todas as etapas até ele chegar fresco à sua xícara.",
-    source: "Sítio Boa Vista do Engano",
-    role: "Consistência e frescor",
-    dose: "10% do perfil",
-    frac: 0.1,
-  },
+const beanSection = $(".bean-section");
+const beanTabs = $$("[data-bean-tab]");
+const beanData = [
+  { name: "100% <br>ARÁBICA", sub: "Coffea arabica", description: "Os cafés especiais Bazilli são 100% Arábica. Produção própria e seleção cuidadosa acompanham o grão, da lavoura até a embalagem.", rows: [["Espécie", "Coffea arabica"], ["Seleção", "Cafés especiais"], ["Produção", "Família Bazilli"]], angle: -12 },
+  { name: "NOSSA <br>ORIGEM", sub: "Caconde · São Paulo", description: "No Sítio Boa Vista do Engano, na Região Vulcânica, a família Bazilli acompanha o cultivo, a colheita, o processamento e a seleção. Uma história que começou em 1916.", rows: [["Local", "Caconde / SP"], ["Sítio", "Boa Vista do Engano"], ["Tradição", "Desde 1916"]], angle: 14 },
+  { name: "TORRA <br>ARTESANAL", sub: "A curadoria de Roberta Bazilli", description: "Roberta Bazilli, produtora, Q-Grader e mestre de torra, acompanha a seleção e a torra. O trabalho valoriza as características de cada café.", rows: [["Torra", "Artesanal"], ["Curadoria", "Roberta Bazilli"], ["Perfil", "Varia conforme o lote"]], angle: -26 },
+  { name: "SEU <br>RITUAL", sub: "Da moagem à xícara", description: "Em grãos, moa somente a quantidade que vai preparar e ajuste a moagem ao seu método. O café já moído oferece praticidade para o dia a dia.", rows: [["Em grãos", "Moer na hora"], ["Moído", "Pronto para preparar"], ["Conservação", "Bem fechado, longe do calor"]], angle: 8 }
 ];
-
-let currentIngredient = 0;
-
-function setIngredient(i) {
-  if (i === currentIngredient) return;
-  currentIngredient = i;
-  const ing = INGREDIENTS[i];
-
-  // pills
-  $$(".pill").forEach((p, idx) => p.classList.toggle("is-active", idx === i));
-
-  // wordmark + plant draw
-  const wm = $(".inside-wordmark");
-  $(".wm-line-1", wm).textContent = ing.wm[0];
-  $(".wm-line-2", wm).textContent = ing.wm[1];
-  wm.classList.remove("is-in");
-  $(".inside-plant").classList.remove("is-in");
-  void wm.offsetWidth;
-  wm.classList.add("is-in");
-  $(".inside-plant").classList.add("is-in");
-  $(".inside-latin").textContent = ing.latin;
-
-  // visual
-  $(".inside-glow").style.setProperty("--ing-color", ing.color);
-  insideBotanical.setColor(ing.color);
-
-  // details swap
-  const details = $(".inside-details");
-  details.classList.remove("in");
-  details.classList.add("swapping");
-  setTimeout(() => {
-    $(".ing-index", details).textContent = ing.index;
-    $(".ing-desc", details).textContent = ing.desc;
-    const rows = $$(".ing-row", details);
-    rows[0].querySelector("dt").textContent = "Origem";
-    rows[0].querySelector("dd").textContent = ing.source;
-    rows[1].querySelector("dt").textContent = "Papel";
-    rows[1].querySelector("dd").textContent = ing.role;
-    rows[2].querySelector("dt").textContent = "Na xícara";
-    rows[2].querySelector("dd").childNodes[0].textContent = `${ing.dose} `;
-    const fill = $("[data-dose-fill]", details);
-    fill.style.setProperty("--dose", String(ing.frac));
-    details.classList.remove("swapping");
-    details.classList.add("in");
-  }, 340);
+function selectBean(index, focus = false) {
+  const data = beanData[index];
+  beanTabs.forEach((tab, i) => { tab.setAttribute("aria-selected", String(i === index)); tab.tabIndex = i === index ? 0 : -1; });
+  $("#bean-name").innerHTML = data.name;
+  $("#bean-subtitle").textContent = data.sub;
+  $(".bean-count").textContent = `0${index + 1} / 04`;
+  $(".bean-description").textContent = data.description;
+  $$(".bean-info dl div").forEach((row, i) => { $("dt",row).textContent = data.rows[i][0]; $("dd",row).textContent = data.rows[i][1]; });
+  $("#bean-info").setAttribute("aria-labelledby", `bean-tab-${index}`);
+  beanSection.style.setProperty("--bean-angle", `${data.angle}deg`);
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    [$(".bean-name"), $(".bean-info")].forEach(el => el.animate([{opacity:0,transform:"translateY(14px)"},{opacity:1,transform:"translateY(0)"}], {duration:500,easing:"ease-out"}));
+  }
+  if (focus) beanTabs[index].focus();
 }
-
-$$(".pill").forEach((p) => p.addEventListener("click", () => setIngredient(Number(p.dataset.ingPill))));
-
-// mobile deck scroll → pagination sync
-const deckPages = $$(".deck-page");
-function updateDeckPagination() {
-  const cards = $$(".deck-card", deck);
-  let active = 0;
-  cards.forEach((c, idx) => {
-    const r = c.getBoundingClientRect();
-    if (r.left <= window.innerWidth * 0.5) active = idx;
+beanTabs.forEach((tab,index) => {
+  tab.addEventListener("click",()=>selectBean(index));
+  tab.addEventListener("keydown",event=>{
+    const next=event.key==="ArrowRight"?(index+1)%4:event.key==="ArrowLeft"?(index+3)%4:event.key==="Home"?0:event.key==="End"?3:null;
+    if(next!==null){event.preventDefault();selectBean(next,true);}
   });
-  deckPages.forEach((p, idx) => p.classList.toggle("is-active", idx === active));
+});
+beanSection.addEventListener("pointermove",event=>{
+  if(event.pointerType!=="mouse" || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const r=beanSection.getBoundingClientRect();
+  beanSection.style.setProperty("--bean-yaw",`${((event.clientX-r.left)/r.width-.5)*32}deg`);
+  beanSection.style.setProperty("--bean-pitch",`${((event.clientY-r.top)/r.height-.5)*-20}deg`);
+});
+beanSection.addEventListener("pointerleave",()=>{beanSection.style.setProperty("--bean-yaw","0deg");beanSection.style.setProperty("--bean-pitch","0deg");});
+new IntersectionObserver(entries=>{beanSection.classList.toggle("bean-visible",entries[0].isIntersecting);},{threshold:.05}).observe(beanSection);
+
+// Present the coffee collection while scrolling; pagination remains a shortcut.
+const coffeeSection = $("#flavors");
+const coffeeStage = $(".flavors-stage");
+const coffeeMotion = matchMedia("(prefers-reduced-motion: reduce)");
+let coffeeFrame = 0;
+function drawCoffees() {
+  coffeeFrame=0;
+  if(coffeeMotion.matches) return;
+  const rect=coffeeSection.getBoundingClientRect();
+  const travel=Math.max(1,coffeeSection.offsetHeight-coffeeStage.offsetHeight);
+  const progress=clamp(-rect.top/travel,0,1);
+  if(rect.top<=0 && rect.bottom>=coffeeStage.offsetHeight) setFlavor(Math.min(coffeeCount-1,Math.floor(progress*coffeeCount)));
+  coffeeSection.style.setProperty("--coffee-progress",String(progress));
 }
-deck.addEventListener("scroll", updateDeckPagination, { passive: true });
-window.addEventListener("resize", updateDeckPagination);
-deckPages.forEach((p) =>
-  p.addEventListener("click", () => {
-    const cards = $$(".deck-card", deck);
-    cards[Number(p.dataset.deckBtn)].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-  })
-);
+function queueCoffees(){if(!coffeeFrame)coffeeFrame=requestAnimationFrame(drawCoffees);}
+function configureCoffees(){
+  coffeeSection.classList.toggle("coffee-scroll",!coffeeMotion.matches);
+  coffeeSection.style.height=coffeeMotion.matches?"":`${coffeeStage.offsetHeight+innerHeight*coffeeCount*.85}px`;
+  queueCoffees();
+}
+function goCoffee(index){
+  setFlavor(index);
+  if(!coffeeMotion.matches){const top=coffeeSection.getBoundingClientRect().top+scrollY;window.scrollTo({top:top+((index+.35)/coffeeCount)*(coffeeSection.offsetHeight-coffeeStage.offsetHeight),behavior:"smooth"});}
+}
+$$(".flavor-page").forEach((tab,index)=>tab.addEventListener("click",()=>goCoffee(index)));
+window.addEventListener("scroll",queueCoffees,{passive:true});
+window.addEventListener("resize",configureCoffees);
+coffeeMotion.addEventListener("change",configureCoffees);
+configureCoffees();
 
 /* ============================================================
    8. STORY SCROLLER (pinned scroll progress)
    ============================================================ */
-const CHAPTERS = 5;
-const storyScroller = $("#storyScroller");
-const storyPinned = $(".story-pinned");
-let storyProgress = 0;
-let currentChapter = -1;
-
-storyScroller.style.height = `${CHAPTERS * 100}vh`;
-
-function setChapter(i) {
-  if (i === currentChapter) return;
-  currentChapter = i;
-
-  $$(".story-chapter").forEach((c, idx) => {
-    const on = idx === i;
-    c.classList.remove("is-active");
-    if (on) {
-      void c.offsetWidth; // reflow to replay entry animations
-      c.classList.add("is-active");
-    }
-  });
-  $$(".story-image-panel").forEach((p, idx) => p.classList.toggle("is-active", idx === i));
-  $$(".story-year-bg").forEach((y, idx) => y.classList.toggle("is-active", idx === i));
-  $$(".story-year-btn").forEach((b, idx) => b.classList.toggle("is-active", idx === i));
+const historyRoot = $("#storyScroller");
+const historyStage = $(".story-pinned");
+const historyScenes = $$(".history-scene");
+const historyButtons = $$("[data-history-button]");
+const historyReduced = matchMedia("(prefers-reduced-motion: reduce)");
+historyRoot.style.height = "auto";
+historyScenes.forEach((scene,index)=>{scene.id=`history-${index}`;scene.setAttribute("aria-hidden","false");scene.classList.add("is-active");});
+function updateHistory() {
+ const rect=historyRoot.getBoundingClientRect();
+ const progress=clamp(-rect.top/Math.max(1,rect.height-innerHeight),0,1);
+ historyStage.style.setProperty("--history-progress",String(progress));
+ let active=0,nearest=Infinity;
+ historyScenes.forEach((scene,index)=>{
+  const box=scene.getBoundingClientRect();
+  const distance=Math.abs(box.top+box.height*.45-innerHeight*.5);
+  if(distance<nearest){nearest=distance;active=index;}
+  const local=clamp((innerHeight-box.top)/(innerHeight+box.height),0,1);
+  scene.style.setProperty("--flow-shift",historyReduced.matches?"0px":`${(local-.5)*-64}px`);
+  scene.style.setProperty("--flow-turn",historyReduced.matches?"0deg":`${(local-.5)*8}deg`);
+ });
+ historyButtons.forEach((button,index)=>button.setAttribute("aria-current",index===active?"step":"false"));
 }
-
-function onStoryProgress() {
-  const rect = storyScroller.getBoundingClientRect();
-  const vh = window.innerHeight;
-  if (rect.bottom < 0 || rect.top > vh) return;
-
-  const scrolled = clamp(-rect.top, 0, rect.height - vh);
-  storyProgress = scrolled / (rect.height - vh);
-
-  // intro overlay: visible at start, fades as first chapter takes over
-  const intro = $(".story-intro");
-  const stage = $(".story-stage");
-  const introEnd = 1 / CHAPTERS;
-  if (storyProgress < introEnd) {
-    intro.style.opacity = String(1 - storyProgress / introEnd);
-    intro.style.transform = `translateY(${-storyProgress * 60}px)`;
-    stage.style.opacity = String(storyProgress / introEnd);
-  } else {
-    intro.style.opacity = "0";
-    stage.style.opacity = "1";
-  }
-
-  // progress rail
-  $("#storyRailFill").style.transform = `scaleY(${storyProgress})`;
-
-  // chapter index
-  const chapter = clamp(Math.floor(storyProgress * CHAPTERS), 0, CHAPTERS - 1);
-  setChapter(chapter);
-}
-
-function scrollStoryToChapter(i) {
-  const rectTop = storyScroller.getBoundingClientRect().top + window.scrollY;
-  const max = storyScroller.offsetHeight - window.innerHeight;
-  window.scrollTo({ top: rectTop + ((i + 0.5) / CHAPTERS) * max, behavior: "smooth" });
-}
-$$(".story-year-btn").forEach((b) =>
-  b.addEventListener("click", () => scrollStoryToChapter(Number(b.dataset.yearBtn || b.dataset.yearBtnM)))
-);
-
-let storyTicking = false;
-window.addEventListener(
-  "scroll",
-  () => {
-    if (!storyTicking) {
-      requestAnimationFrame(() => {
-        onStoryProgress();
-        storyTicking = false;
-      });
-      storyTicking = true;
-    }
-  },
-  { passive: true }
-);
-onStoryProgress();
+historyButtons.forEach((button,index)=>button.addEventListener("click",()=>historyScenes[index].scrollIntoView({behavior:historyReduced.matches?"instant":"smooth",block:"start"})));
+let historyPending=false;
+window.addEventListener("scroll",()=>{if(!historyPending){historyPending=true;requestAnimationFrame(()=>{historyPending=false;updateHistory();});}},{passive:true});
+window.addEventListener("resize",updateHistory);historyReduced.addEventListener("change",updateHistory);updateHistory();
 
 /* ============================================================
    9. PONTOS DE VENDA — acordeão mobile + cursor contextual
@@ -655,7 +611,7 @@ if (isFinePointer()) {
       const ny = clamp((my - hr.top) / Math.max(1, hr.height), 0, 1);
       heroPointerX = mx;
       heroPointerY = my;
-      heroLensBaseRadius = clamp(Math.min(hr.width, hr.height) * 0.225, 158, 232);
+      heroLensBaseRadius = clamp(Math.min(hr.width, hr.height) * 0.30, 160, 320);
       updateHeroScrollTransition();
       hero.style.setProperty("--fallback-x", `${clamp(nx * 100, 10, 90)}%`);
       hero.style.setProperty("--fallback-y", `${clamp(ny * 100, 16, 84)}%`);
@@ -706,7 +662,7 @@ if (!isFinePointer()) {
     const nx = x / Math.max(1, rect.width);
     heroPointerX = event.clientX;
     heroPointerY = event.clientY;
-    heroLensBaseRadius = clamp(Math.min(rect.width, rect.height) * 0.29, 132, 210);
+    heroLensBaseRadius = clamp(Math.min(rect.width, rect.height) * 0.30, 160, 320);
     updateHeroScrollTransition();
     const framePosition = nx * Math.max(0, fallbackFrames.length - 1);
     fallbackFrames.forEach((frame, index) => {
@@ -818,6 +774,10 @@ if (canTurntable && !canTurntable.hidden) {
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let canRaf = 0;
   let activeCanIndex = 0;
+  let interactiveCanPosition = null;
+  let dragStartX = 0;
+  let dragStartPosition = 0;
+  let isDraggingCan = false;
 
   const setActiveCanCopy = (index) => {
     if (index === activeCanIndex) return;
@@ -830,14 +790,7 @@ if (canTurntable && !canTurntable.hidden) {
     canCounter.textContent = String(index + 1).padStart(2, "0");
   };
 
-  const drawCanTurntable = () => {
-    canRaf = 0;
-    if (reducedMotion.matches) return;
-
-    const rect = canTurntable.getBoundingClientRect();
-    const travel = Math.max(1, canTurntable.offsetHeight - window.innerHeight);
-    const progress = clamp(-rect.top / travel, 0, 1);
-    const position = progress * (canFrames.length - 1);
+  const renderCanPosition = (position, progress = position / Math.max(1, canFrames.length - 1)) => {
     const lower = Math.floor(position);
     const upper = Math.min(canFrames.length - 1, Math.ceil(position));
     const mix = position - lower;
@@ -856,6 +809,50 @@ if (canTurntable && !canTurntable.hidden) {
     canProgress.style.transform = `scaleX(${progress.toFixed(4)})`;
     setActiveCanCopy(Math.round(position));
   };
+
+  const drawCanTurntable = () => {
+    canRaf = 0;
+    if (reducedMotion.matches || isDraggingCan) return;
+
+    const rect = canTurntable.getBoundingClientRect();
+    const travel = Math.max(1, canTurntable.offsetHeight - window.innerHeight);
+    const progress = clamp(-rect.top / travel, 0, 1);
+    interactiveCanPosition = progress * (canFrames.length - 1);
+    renderCanPosition(interactiveCanPosition, progress);
+  };
+
+  const canVisual = $(".can-turntable-visual", canTurntable);
+  const setInteractivePosition = (position) => {
+    interactiveCanPosition = clamp(position, 0, canFrames.length - 1);
+    renderCanPosition(interactiveCanPosition);
+  };
+
+  canVisual.addEventListener("pointerdown", (event) => {
+    if (reducedMotion.matches) return;
+    isDraggingCan = true;
+    dragStartX = event.clientX;
+    dragStartPosition = interactiveCanPosition ?? activeCanIndex;
+    canVisual.setPointerCapture?.(event.pointerId);
+  });
+  canVisual.addEventListener("pointermove", (event) => {
+    if (!isDraggingCan) return;
+    const sensitivity = Math.max(150, canVisual.clientWidth * 0.55);
+    setInteractivePosition(dragStartPosition + (event.clientX - dragStartX) / sensitivity * (canFrames.length - 1));
+  });
+  const endCanDrag = (event) => {
+    if (!isDraggingCan) return;
+    isDraggingCan = false;
+    setInteractivePosition(Math.round(interactiveCanPosition ?? activeCanIndex));
+    canVisual.releasePointerCapture?.(event.pointerId);
+  };
+  canVisual.addEventListener("pointerup", endCanDrag);
+  canVisual.addEventListener("pointercancel", endCanDrag);
+  canVisual.addEventListener("keydown", (event) => {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    const direction = event.key === "ArrowRight" ? 1 : -1;
+    setInteractivePosition(Math.round(interactiveCanPosition ?? activeCanIndex) + direction);
+  });
 
   const requestCanDraw = () => {
     if (!canRaf) canRaf = requestAnimationFrame(drawCanTurntable);
